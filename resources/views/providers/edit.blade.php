@@ -2,7 +2,7 @@
 
 @section('content')
 @parent
-<div class="col-md-5">
+<div class="col-md-10">
 	<h1>Editando: {!! $provideer->name  !!}</h1>
 	<hr>
 	<form method="POST"	action="{{ url('/Providers', $provideer->id) }}" accept-charset="UTF-8">

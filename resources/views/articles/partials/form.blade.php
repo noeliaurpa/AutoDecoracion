@@ -1,7 +1,7 @@
 <!-- Form Input -->
 <div class="form-group">
   <label for="name">Nombre:</label>
-  <input pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}"
+  <input 
   type="text" name="name" class="form-control"
   value="{{ isset($articlee->name) ? $articlee->name : '' }}" required>
 </div>

@@ -103,7 +103,8 @@ Route::delete('vehicles/{id}', 'VehiclesController@destroy')->middleware('auth')
 
 //***************************************************************************************
 //this route is for send message to users when finish the decoration
-Route::get('send', 'Sms@send')->middleware('auth');
+Route::get('send', 'Sms@index')->middleware('auth');
+Route::post('send/create', 'Sms@send')->middleware('auth');
 
 //****************************************************************************************
 
@@ -111,6 +112,9 @@ Route::get('send', 'Sms@send')->middleware('auth');
 Route::get('invoices', 'InvoiceReportController@index')->middleware('auth');
 
 Route::get('invoices/create', 'InvoiceReportController@create')->middleware('auth');
+
+Route::get('invoices/getdata', 'InvoiceReportController@getdata')->middleware('auth');
+
 Route::get('invoices/{id}/show', 'InvoiceReportController@show')->middleware('auth');
 Route::get('invoices/{id}/edit', 'InvoiceReportController@edit')->middleware('auth');
 

@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        //Onwwward\Textmagic\TextmagicServiceProvider::class,
 
         ],
 
@@ -230,6 +231,7 @@ return [
     'Fullcalendar' => Edofre\Fullcalendar\Facades\Fullcalendar::class,
     'Form' => Collective\Html\FormFacade::class,
     'Html' => Collective\Html\HtmlFacade::class,
+    //'Textmagic' => Onwwward\Textmagic\Facade\Textmagic::class,
     ],
 
     ];

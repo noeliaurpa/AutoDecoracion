@@ -1,5 +1,6 @@
 <?php
 
+namespace App\textmagic;
 /**
  * TextMagic SMS API wrapper
  * 

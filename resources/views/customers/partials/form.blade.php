@@ -1,5 +1,6 @@
 <!-- Form Input -->
 <div>
+  <label for="nameProvider">Nombre del proveedor:</label>
   <select id="provider_id" class="form-control" name="provider_id" autofocus>
   <option></option>  
   @foreach($proveer as $key)

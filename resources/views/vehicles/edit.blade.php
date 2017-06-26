@@ -2,7 +2,7 @@
 
 @section('content')
 @parent
-<div class="col-md-5">
+<div class="col-md-10">
 	<h1>Editando: {!! $vehiclee->license_plate_or_detail  !!}</h1>
 	<hr>
 	<form method="POST"	action="{{ url('/vehicles', $vehiclee->id) }}" accept-charset="UTF-8">

@@ -8,106 +8,107 @@
     </div>
 </div>
 <div class="col-md-2 col-xs-2">
-     <div class="container">
+   <div class="container">
 
-            {!! Form::open(['route' => 'quotes.store', 'method' => 'post', 'role' => 'form']) !!}
-            <div id="responsive-modal" class="modal fade" tabindex="-1" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Registro de una nueva cita</h4>
+    {!! Form::open(['route' => 'quotes.store', 'method' => 'post', 'role' => 'form']) !!}
+    <div id="responsive-modal" class="modal fade" tabindex="-1" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Registro de una nueva cita</h4>
 
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                {!! Form::label('title', 'Nombre de la persona') !!}
-                                {!! Form::text('title', old('title'), ['class' => 'form-control', 'required' => 'required']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('date_start', 'Fecha de inicio') !!}
-                                {!! Form::text('date_start', old('date_start'), ['class' => 'form-control', 'readonly' => 'true']) !!}
-                            </div>
-                            
-                            <div class="form-group">
-                                {!! Form::label('time_start', 'Hora inicio') !!}
-                                {!! Form::text('time_start', old('time_start'), ['class' => 'form-control', 'required' => 'required']) !!}
-                            </div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {!! Form::label('title', 'Nombre de la persona') !!}
+                        {!! Form::text('title', old('title'), ['class' => 'form-control', 'required' => 'required']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('date_start', 'Fecha de inicio') !!}
+                        {!! Form::text('date_start', old('date_start'), ['class' => 'form-control', 'readonly' => 'true']) !!}
+                    </div>
+                    
+                    <div class="form-group">
+                        {!! Form::label('time_start', 'Hora inicio') !!}
+                        {!! Form::text('time_start', old('time_start'), ['class' => 'form-control', 'required' => 'required']) !!}
+                    </div>
 
-                            <div class="form-group">
-                                {!! Form::label('date_end', 'Fecha hora fin') !!}
-                                {!! Form::text('date_end', old('date_end'), ['class' => 'form-control', 'required' => 'required']) !!}
-                            </div>
+                    <div class="form-group">
+                        {!! Form::label('date_end', 'Fecha hora fin') !!}
+                        {!! Form::text('date_end', old('date_end'), ['class' => 'form-control', 'required' => 'required']) !!}
+                    </div>
 
-                            <div class="form-group">
-                                {!! Form::label('color', 'Color') !!}
-                                <div class="input-group colorpicker">
-                                    {!! Form::text('color', old('color'), ['class' => 'form-control', 'required' => 'required']) !!}
-                                    <span class="input-group-addon"><i></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            {!! Form::submit('GUARDAR', ['class' => 'btn btn-success']) !!}
-                            <button type="button"class="btn btn-default" data-dismiss="modal">CANCELAR</button>
+                    <div class="form-group">
+                        {!! Form::label('color', 'Color') !!}
+                        <div class="input-group colorpicker">
+                            {!! Form::text('color', old('color'), ['class' => 'form-control', 'required' => 'required']) !!}
+                            <span class="input-group-addon"><i></i></span>
                         </div>
                     </div>
                 </div>
-            </div>
-            {!! Form::close() !!}
-            <div id='calendar'></div>
-            
-            <div id="modal-quote" class="modal fade" tabindex="-1" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>Detalle de la cita</h4>
-
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                {!! Form::label('_title', 'Nombre de la persona') !!}
-                                {!! Form::text('_title', old('_title'), ['class' => 'form-control']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('_date_start', 'Fecha de inicio') !!}
-                                {!! Form::text('_date_start', old('_date_start'), ['class' => 'form-control', 'readonly' => 'true']) !!}
-                            </div>
-                            
-                            <div class="form-group">
-                                {!! Form::label('_time_start', 'Hora inicio') !!}
-                                {!! Form::text('_time_start', old('_time_start'), ['class' => 'form-control']) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('_date_end', 'Fecha hora fin') !!}
-                                {!! Form::text('_date_end', old('_date_end'), ['class' => 'form-control']) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('_color', 'Color') !!}
-                                <div class="input-group colorpicker">
-                                    {!! Form::text('_color', old('_color'), ['class' => 'form-control']) !!}
-                                    <span class="input-group-addon">
-                                        <i></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a id="delete" data-href="{{ url('quotes') }}" data-id="" class="btn btn-danger">ELIMINAR</a>
-                            <button type="button"class="btn btn-default" data-dismiss="modal">CANCELAR</button>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    {!! Form::submit('GUARDAR', ['class' => 'btn btn-success']) !!}
+                    <button type="button"class="btn btn-default" data-dismiss="modal">CANCELAR</button>
                 </div>
             </div>
-
         </div>
+    </div>
+    {!! Form::close() !!}
+    <div id='calendar'></div>
+    
+    <div id="modal-quote" class="modal fade" tabindex="-1" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Detalle de la cita</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {!! Form::label('_title', 'Nombre de la persona') !!}
+                        {!! Form::text('_title', old('_title'), ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('_date_start', 'Fecha de inicio') !!}
+                        {!! Form::text('_date_start', old('_date_start'), ['class' => 'form-control', 'readonly' => 'true']) !!}
+                    </div>
+                    
+                    <div class="form-group">
+                        {!! Form::label('_time_start', 'Hora inicio') !!}
+                        {!! Form::text('_time_start', old('_time_start'), ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('_date_end', 'Fecha hora fin') !!}
+                        {!! Form::text('_date_end', old('_date_end'), ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('_color', 'Color') !!}
+                        <div class="input-group colorpicker">
+                            {!! Form::text('_color', old('_color'), ['class' => 'form-control']) !!}
+                            <span class="input-group-addon">
+                                <i></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="delete" data-href="{{ url('quotes') }}" data-id="" class="btn btn-danger">ELIMINAR</a>
+                    <button type="button"class="btn btn-default" data-dismiss="modal">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </div>
 {!! Html::script('js/app.js') !!}
 {!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
 {!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
 {!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
 {!! Html::script('vendor/seguce92/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') !!}
+{!! Html::script('vendor/seguce92/fullcalendar/locale/es.js') !!}
 <script>
 
 var BASEURL = "{{ url('/') }}"
@@ -117,7 +118,7 @@ $(document).ready(function() {
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,basicWeek,basicDay'
+            right: 'month,agendaWeek,agendaDay,listMonth'
         },
                     navLinks: true, // can click day/week titles to navigate views
                     editable: true,
@@ -173,7 +174,7 @@ $('#delete').on('click', function(){
         type: 'DELETE',
         success: function(){
             $('#modal-quote').modal('hide');
-            alert('Recargue la página para ver los cambios');
+            window.location.reload();
         },
         error: function(result){
             $('#modal-quote').modal('show');

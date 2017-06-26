@@ -8,9 +8,10 @@
 	<?php echo Form::open(['url' => 'articles', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
-		<?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Buscar articulos', 'aria-describedby' => 'search']); ?>
 		<span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		<?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Buscar articulos', 'aria-describedby' => 'search']); ?>
 	</div>
+	<h6 style="text-align: center; background: #eeeeee; border-radius: 21%;">Precione enter para buscar</h6>
 	<?php echo Form::close(); ?>
 	<div class="table-responsive">
 		@if(count($articlee)>0)
@@ -48,14 +49,14 @@
 				<td>
 					<a class="btn btn-default btn-sm"
 					href="{{ URL::to('articles/' . $artic->id) . '/show' }}" role="button">
-					<input type="image" src="img/see.png"/>
+					<span class="glyphicon glyphicon-eye-open"></span>
 				</a>
 			</td>
 			{{-- Columna botón EDIT --}}
 			<td>
 				<a class="btn btn-default btn-sm"
 				href="{{ URL::to('articles/' . $artic->id . '/edit') }}" role="button">
-				<input type="image" src="img/update.png"/>
+				<span class="glyphicon glyphicon-pencil"></span>
 			</a>
 		</td>
 		{{-- Columna botón DELETE --}}
@@ -67,7 +68,7 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="hidden" name="_method" value="DELETE">
 			<button type="button" class="btn btn-default btn-sm">
-				<input type="image" src="img/delete.png"/>
+				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</form>
 	</td>
@@ -106,7 +107,7 @@
 		<td>
 			<a class="btn btn-default btn-sm"
 			href="{{ URL::to('articles/' . $artic->id) . '/show' }}" role="button">
-			<input type="image" src="img/see.png"/>
+			<span class="glyphicon glyphicon-eye-open"></span>
 		</a>
 	</td>
 </tr>
@@ -125,7 +126,7 @@ Registrar nuevo artice
 </a>
 @endif
 <a href="{{ url('/home') }}"
-class="btn btn-default btn-sm">
+class="btn btn-primary btn-sm">
 Inicio
 </a>
 

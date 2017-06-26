@@ -19,8 +19,12 @@
     {!! Html::style('vendor/seguce92/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') !!}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset('bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('bower_components/EasyAutocomplete/lib/jquery-1.11.2.min.js') }}"></script>
-    <script src="{{ asset('bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js') }}" type="text/javascript" ></script>
+    <!--script src="{{ asset('bower_components/EasyAutocomplete/lib/jquery-1.11.2.min.js') }}"></script>
+    <script src="{{ asset('bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js') }}" type="text/javascript" ></script-->
+    {!! Html::style('awesomplete/awesomplete.css') !!}
+    {!! Html::style('awesomplete/prism/prism.css') !!}
+    <script src="{{ asset('awesomplete/awesomplete.js') }}"></script>
+    <script src="{{ asset('awesomplete/index.js') }}"></script>
     <!-- Scripts -->
     <script>
     window.Laravel = {!! json_encode([
@@ -54,21 +58,21 @@
                     @else 
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle linka" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle linka">
                          {{ Auth::user()->name }} <span class="caret"></span>
                      </a>
                      @if (Auth::user()->workstation == "Administrador")
                      <ul class="dropdown-menu" role="menu">
-                        <li class = "lipadding dropdown"><a class="btn btn-default linksHome" href="{{ route('register') }}">Registrar</a></li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
+                        <li class = "dropdown"> <a class="btn btn-primary linksHome" href="{{ route('register') }}">Registrar</a></li>
+                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
                         <li>
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -82,15 +86,15 @@
                     </li>
                     @else
                     <ul class="dropdown-menu" role="menu">
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
                         <li>
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -118,15 +122,15 @@
 
                 <div class="panel-heading menu_principal menu_home">
                     <ul>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/proveedor.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/articulo.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/cliente.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/vehiculo.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/inventario.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/invoice.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/caja_chica.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/notificacion.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "lipadding"> <input class="linksMenu" type="image" src="{{ asset('img/reporte.png') }}"/> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
                     </ul>
                 </div>
             </div>
