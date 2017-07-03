@@ -8,10 +8,9 @@
 	<?php echo Form::open(['url' => 'Providers', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
-		<span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		<?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Buscar proveedor', 'aria-describedby' => 'search']); ?>
+		<span title = "Precione enter para buscar" class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		<?php echo Form::text('name', null, ['title' => 'Precione enter para buscar', 'class' => 'form-control search', 'placeholder' => 'Buscar proveedor', 'aria-describedby' => 'search']); ?>
 	</div>
-	<h6 style="text-align: center; background: #eeeeee; border-radius: 21%;">Precione enter para buscar</h6>
 	<?php echo Form::close(); ?>
 	<div class="table-responsive">
 		@if(count($provideer)>0)

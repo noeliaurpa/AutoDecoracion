@@ -21,7 +21,7 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los artistas
-        $customers['cliennt'] = Customer::search($request->name)->orderBy('id', 'DESC')->paginate(5);
+        $customers['cliennt'] = Customer::search($request->name)->orderBy('id', 'ASC')->paginate();
         $customers['proveer'] = Provider::all();
         return View('/customers/index', $customers);
     }

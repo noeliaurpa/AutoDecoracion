@@ -22,7 +22,7 @@ class ArticlesController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los artistas
-        $articles['articlee'] = Article::search($request->name)->orderBy('id', 'DESC')->paginate(8);
+        $articles['articlee'] = Article::search($request->name)->orderBy('id', 'ASC')->paginate();
         // en formato json
         //return response()->json($Articles);
         return View('/articles/index', $articles);

@@ -7,34 +7,28 @@
   <h1>Mostrando Articulos</h1>
   <p>El articulo solicitado no existe</p>
   @else
-  <h1 style="text-align: center;">Mostrando: {{ $articlee->name }}</h1>
-  <div class="input-group">
-    <span class="input-group-addon spanP" id="basic-addon1">Nombre del articulo: </span>
-    <input readonly="true" type="text" class="form-control inputP" value="{{ $articlee->name }}">
+  <h1 style="text-align: center;">{{ $articlee->name }}</h1>
+  <div class="form-group">
+    <label>Nombre del articulo: </label>
+    <input readonly="true" type="text" class="form-control" value="{{ $articlee->name }}">
   </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon spanP" id="basic-addon1">Codigo: </span>
-    <input readonly="true" type="text" class="form-control inputP" value="{{ $articlee->code }}">
+  <div class="form-group">
+    <label>Codigo: </label>
+    <input readonly="true" type="text" class="form-control" value="{{ $articlee->code }}">
   </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon spanP" id="basic-addon1">Precio de venta: </span>
-    <input readonly="true" type="text" class="form-control inputP" value="{{ $articlee->sale_price }}">
+  <div class="form-group">
+    <label>Precio de venta: </label>
+    <input readonly="true" type="text" class="form-control" value="{{ $articlee->sale_price }}">
   </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon spanP" id="basic-addon1">Precio de compra: </span>
-    <input readonly="true" type="text" class="form-control inputP" value="{{ $articlee->purchase_price }}">
+  <div class="form-group">
+    <label>Precio de compra: </label>
+    <input readonly="true" type="text" class="form-control" value="{{ $articlee->purchase_price }}">
   </div>
-  <br>
-  <div class="input-group">
-    <span class="input-group-addon spanP" id="basic-addon1">Unidad o Cantidad: </span>
-    <input readonly="true" type="text" class="form-control inputP" value="{{ $articlee->unit_or_quantity }}">
+  <div class="form-group">
+    <label>Unidad o Cantidad: </label>
+    <input readonly="true" type="text" class="form-control" value="{{ $articlee->unit_or_quantity }}">
   </div>
-  <br>
   @endif
-
 
   <a href="{{ url('/articles') }}"
   class="btn btn-primary">

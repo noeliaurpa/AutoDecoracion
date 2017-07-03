@@ -54,7 +54,7 @@
                                     Iniciar Sesion
                                 </button>
 
-                                <a class="btn btn-link menuPrincipal" href="{{ route('password.request') }}">
+                                <a class="btn btn-link btn-primary" href="{{ route('password.request') }}">
                                     Olvido la contraseña?
                                 </a>
                             </div>

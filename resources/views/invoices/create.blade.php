@@ -6,87 +6,90 @@
 	<h2 class="page-header">
 		Nueva Factura
 	</h2>
-	<div class="well well-sm">
-		<div class="row">
-			<div class="col-xs-10">
-				<input id="nameClient" class="form-control" type="text" placeholder="Nombre del cliente"/>
+	<!--form action=" {{ url('/invoices') }}" method="post">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}"-->
+		<div class="well well-sm">
+			<div class="row">
+				<div class="col-xs-10">
+					<input id="nameClient" name="nameClient" class="form-control" type="text" placeholder="Nombre del cliente"/>
+				</div>
+				<div class="col-xs-2">
+					<input id="numInvoice" name="numInvoice" class="form-control" type="text" placeholder="numero de factura" readonly>
+				</div>
 			</div>
-			<div class="col-xs-2">
-				<input id="numInvoice" class="form-control" type="text" placeholder="numero de factura" readonly>
+			<hr>
+			<div class="row">
+				<div class="col-xs-4">
+					<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo" readonly/>
+				</div>
+				<div class="col-xs-4">
+					<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo" readonly/>
+				</div>
+				<div class="col-xs-4">
+					<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" data-multiple/>
+					<ul id="mylicense" hidden >
+						@foreach($vehicle as $key)
+						<li id="plate" name="{{ $key->id }}" value="{{ $key->license_plate_or_detail }}">{{$key->license_plate_or_detail}}</li>
+						@endforeach 
+					</ul>
+				</div>
 			</div>
 		</div>
-		<hr>
 		<div class="row">
-			<div class="col-xs-4">
-				<input id="brand" class="form-control" type="text" placeholder="Marca del vehículo" readonly/>
-			</div>
-			<div class="col-xs-4">
-				<input id="model" class="form-control" type="text" placeholder="Modelo del vehículo" readonly/>
-			</div>
-			<div class="col-xs-4">
-				<input id="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" data-multiple/>
-				<ul id="mylicense" hidden >
-					@foreach($vehicle as $key)
-					<li id="plate" name="{{ $key->id }}" value="{{ $key->license_plate_or_detail }}">{{$key->license_plate_or_detail}}</li>
-					@endforeach 
+			<div class="col-xs-7">
+				<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo" data-list="#myarticle" data-multiple>
+				<ul id="myarticle" hidden>
+					@foreach($article as $key)
+					<li id="articles" name="{{ $key->id }}" value="{{ $key->name }}">{{$key->name}}</li>
+					@endforeach
 				</ul>
 			</div>
+			<div class="col-xs-2">
+				<input id="quantity" class="form-control" type="number" placeholder="cantidad">
+			</div>
+			<div class="col-xs-2">
+				<input id="price" class="form-control" type="text" placeholder="Precio">	
+			</div>
+			<div class="col-xs-1">
+				<a onclick="add(this)" class="btn btn-primary form-control" id="btn-agregar">
+					<span class="glyphicon glyphicon-plus"></span>
+				</a>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-7">
-			<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo" data-list="#myarticle" data-multiple>
-			<ul id="myarticle" hidden>
-				@foreach($article as $key)
-				<li id="articles" name="{{ $key->id }}" value="{{ $key->name }}">{{$key->name}}</li>
-				@endforeach
-			</ul>
-		</div>
-		<div class="col-xs-2">
-			<input id="quantity" class="form-control" type="number" placeholder="cantidad">
-		</div>
-		<div class="col-xs-2">
-			<input id="price" class="form-control" type="text" placeholder="Precio">	
-		</div>
-		<div class="col-xs-1">
-			<button onclick="add(this)" class="btn btn-primary form-control" id="btn-agregar">
-				<i class="glyphicon glyphicon-plus"></i>
-			</button>
-		</div>
-	</div>
 
-	<hr/>
+		<hr/>
 
-	<table id="detailInvoice" class="table table-striped">
-		<thead>
-			<tr>
-				<th style="width:40px"></th>
-				<th>Articulo</th>
-				<th style="width:100px">Cantidad</th>
-				<th style="width:100px">Precio</th>
-				<th style="width:100px">Total</th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="4" class="text-right"><b>Impuesto de venta</b></td>
-				<td id="impuestoDVenta" class="text-right">$ 00.00</td>
-			</tr>
-			<tr>
-				<td colspan="4" class="text-right"><b>Sub total</b></td>
-				<td id="subtotal" class="text-right">$ 00.00</td>
-			</tr>
-			<tr>
-				<td colspan="4" class="text-right"><b>Total</b></td>
-				<td id="total" class="text-right">$ 00.00</td>
-			</tr>
-		</tfoot>
-	</table>
-	<div>
-		<button onclick="saveData()" class="btn btn-primary form-control">Guardar</button>
-	</div>
+		<table name="detailInvoice" id="detailInvoice" class="table table-striped">
+			<thead>
+				<tr>
+					<th style="width:40px"></th>
+					<th>Articulo</th>
+					<th style="width:100px">Cantidad</th>
+					<th style="width:100px">Precio</th>
+					<th style="width:100px">Total</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4" class="text-right"><b>Impuesto de venta ₡</b></td>
+					<td name="IV" id="impuestoDVenta" class="text-right">0</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-right"><b>Sub total ₡</b></td>
+					<td id="subtotal" class="text-right">0</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-right"><b>Total ₡</b></td>
+					<td id="total" class="text-right">0</td>
+				</tr>
+			</tfoot>
+		</table>
+		<div>
+			<button onclick="saveData()" class="btn btn-primary form-control">Guardar</button>
+		</div>
+	<!--/form-->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -190,21 +193,24 @@ function addToCartTable(cells) {
 	var article = document.getElementById("articlee").value;
 	var quanti = document.getElementById("quantity").value;
 	var price = document.getElementById("price").value;
-	var total = parseFloat(parseInt(quanti)*parseInt(price));
-	var newRow = document.createElement('tr');
-	var cellRemoveBtn = createCell();
-	var id = document.createElement("id");
-	cellRemoveBtn.appendChild(createRemoveBtn())
-	newRow.appendChild(cellRemoveBtn);
-	newRow.appendChild(createCell(article));
-	newRow.appendChild(createCell(quanti));
-	newRow.appendChild(createCell(price));
-	newRow.appendChild(createCell(total));
-	newRow.setAttribute("id", numero);
-	numero++;
+	if(article == "" || quanti == "" || price == ""){
+		alert("Debe agregar los campos del nombre del articulo, la cantidad y el precio para poder agregarlo a la factura.");
+	}else{
+		var total = parseFloat(parseInt(quanti)*parseInt(price));
+		var newRow = document.createElement('tr');
+		var cellRemoveBtn = createCell();
+		var id = document.createElement("id");
+		cellRemoveBtn.appendChild(createRemoveBtn())
+		newRow.appendChild(cellRemoveBtn);
+		newRow.appendChild(createCell(article));
+		newRow.appendChild(createCell(quanti));
+		newRow.appendChild(createCell(price));
+		newRow.appendChild(createCell(total));
+		newRow.setAttribute("id", numero);
+		numero++;
 
-	document.querySelector('#detailInvoice tbody').appendChild(newRow);
-	var miTabla = document.getElementsByTagName("table")[0];
+		document.querySelector('#detailInvoice tbody').appendChild(newRow);
+		var miTabla = document.getElementsByTagName("table")[0];
 	//console.log(miTabla);
 	var miybody = miTabla.getElementsByTagName("tbody")[0];
 	//console.log(miybody.rows.length);
@@ -223,17 +229,20 @@ function addToCartTable(cells) {
 			document.getElementById("impuestoDVenta").innerHTML = iv.toFixed(2);
 			document.getElementById("subtotal").innerHTML = subT.toFixed(2);
 			document.getElementById("total").innerHTML = tot.toFixed(2);
+			document.getElementById("quantity").value = "";
 		}	
 	}
 }
-
+}
+var BASEURL = "{{ url('/') }}"
 function saveData(){
+	//debugger;
 	var miTabla = document.getElementsByTagName("table")[0];
 	//console.log(miTabla);
 	var miybody = miTabla.getElementsByTagName("tbody")[0];
 	var arreglo = [];
 	//console.log(miybody.rows.length);
-	for (var i = 0; i <= miybody.rows.length; i++) {
+	for (var i = 0; i < miybody.rows.length; i++) {
 
 		var miFila = miybody.getElementsByTagName("tr")[i];
 
@@ -241,11 +250,25 @@ function saveData(){
 		var miCelda2 = miFila.getElementsByTagName("td")[2].innerHTML;
 		var miCelda3 = miFila.getElementsByTagName("td")[3].innerHTML;
 		var miCelda4 = miFila.getElementsByTagName("td")[4].innerHTML;
-		arreglo.push(miCelda1+ "," +miCelda2+ "," +miCelda3+ "," +miCelda4);
-
+		arreglo.push(miCelda1);
+		arreglo.push(miCelda2);
+		arreglo.push(miCelda3);
+		arreglo.push(miCelda4);
 	};
-	
 
+	$.post(BASEURL + '/invoices', {
+		nameC: document.getElementById("nameClient").value,
+		brand: document.getElementById("brand").value,
+		model: document.getElementById("model").value,
+		license: document.getElementById("license").value,
+		numInvoice: document.getElementById("numInvoice").value,
+		iv: document.getElementById("impuestoDVenta").innerHTML,
+		sbt: document.getElementById("subtotal").innerHTML,
+		tot: document.getElementById("total").innerHTML,
+		detail: arreglo,
+	}, function (r) {
+		return window.location.href = BASEURL + '/invoices';
+	});
 }
 
 function createRemoveBtn() {

@@ -65,14 +65,13 @@
                      <ul class="dropdown-menu" role="menu">
                         <li class = "dropdown"> <a class="btn btn-primary linksHome" href="{{ route('register') }}">Registrar</a></li>
                         <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('articles/')}}" role="button"> Articulos </a> </li>
                         <li class = "dropdown"> <a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
                         <li class = "dropdown"> <a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
                         <li class = "dropdown"> <a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                         <li>
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -90,11 +89,10 @@
                         <li class = "dropdown"><a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
                         <li class = "dropdown"><a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
                         <li class = "dropdown"><a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
                         <li class = "dropdown"><a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                         <li>
                             <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -122,15 +120,14 @@
 
                 <div class="panel-heading menu_principal menu_home">
                     <ul>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 8% 8% 8%;" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 19% 8% 19%;" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 15%;" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 14%;" href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 18% 8% 18%;" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 13% 8% 13%;" href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                     </ul>
                 </div>
             </div>

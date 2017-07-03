@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 use App\Vehicle;
 use App\Customer;
 use App\Article;
+use App\Invoicesreport;
+use App\Invoicesarticle;
 
 class InvoiceReportController extends Controller
 {
@@ -21,9 +23,13 @@ class InvoiceReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('invoices/index');
+        // recupera todos los registros de las facturas
+        $invoices['factura'] = Invoicesreport::all();
+        $invoices['client'] = Customer::where('id',$invoices['factura'][0]->client_id)->get();
+        var_dump($invoices->client);
+        return view('invoices/index' , $invoices);
     }
 
     /**
@@ -50,7 +56,34 @@ class InvoiceReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {  
+            $Vehiculo = Vehicle::where('license_plate_or_detail',$request->license)->get();
+
+            $factura = new Invoicesreport;
+            $factura->vehicle_id = $Vehiculo[0]->id;
+            $factura->number = $request->numInvoice;
+            $factura->client_id = $Vehiculo[0]->client_id;
+            $factura->total = $request->tot;
+            $factura->subtotal = $request->sbt;
+            $factura->iv = $request->iv;
+            $factura->save();
+
+            $invoiceReport = Invoicesreport::all();
+            for ($i=0; $i < count($request->detail) ; $i++) { 
+                $Article = Article::where('name',$request->detail[$i])->get();
+                $facturaArticulo = new Invoicesarticle;
+                $facturaArticulo->invoice_id = $invoiceReport->last()->id;
+                $facturaArticulo->article_id = $Article[0]->id;
+                $facturaArticulo->quantity = $request->detail[$i+1];
+                $facturaArticulo->price = $request->detail[$i+2];
+                $facturaArticulo->total = $request->detail[$i+3];
+                $facturaArticulo->save();
+                $i= $i+3;
+            }
+        } catch (Exception $e) {
+
+        }
+
     }
     /**
      * .

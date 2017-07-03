@@ -7,12 +7,11 @@
 	<h1 style="text-align:center;">Listado de articulos</h1>
 	<?php echo Form::open(['url' => 'articles', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
-	<div class="input-group">
-		<span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		<?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Buscar articulos', 'aria-describedby' => 'search']); ?>
-	</div>
-	<h6 style="text-align: center; background: #eeeeee; border-radius: 21%;">Precione enter para buscar</h6>
-	<?php echo Form::close(); ?>
+		<div class="input-group">
+			<span title="Precione enter para buscar" class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+			<?php echo Form::text('name', null, ['title' => 'Precione enter para buscar','class' => 'form-control search', 'placeholder' => 'Buscar articulos', 'aria-describedby' => 'search']); ?>
+		</div>
+		<?php echo Form::close(); ?>
 	<div class="table-responsive">
 		@if(count($articlee)>0)
 		@if (Auth::user()->workstation == "Administrador")
@@ -134,7 +133,7 @@ Inicio
 <div class="input-group">
 	@if(Session::has('flash_message'))
 	<div class="mensaje">
-	{{Session::get('flash_message')}}
+		{{Session::get('flash_message')}}
 	</div>
 	@endif
 </div>

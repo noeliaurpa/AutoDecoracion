@@ -8,10 +8,9 @@
 	<?php echo Form::open(['url' => 'vehicles', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
-		<span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		<?php echo Form::text('license_plate_or_detail', null, ['class' => 'form-control', 'placeholder' => 'Buscar vehiculos', 'aria-describedby' => 'search']); ?>
+		<span title="Precione enter ara buscar" class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		<?php echo Form::text('license_plate_or_detail', null, ['title' => 'Precione enter para buscar','class' => 'form-control search', 'placeholder' => 'Buscar vehiculos', 'aria-describedby' => 'search']); ?>
 	</div>
-	<h6 style="text-align: center; background: #eeeeee; border-radius: 21%;">Precione enter para buscar</h6>
 	<?php echo Form::close(); ?>
 	<div class="table-responsive">
 		@if(count($vehiclee)>0)

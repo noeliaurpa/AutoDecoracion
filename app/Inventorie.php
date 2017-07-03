@@ -16,8 +16,8 @@ class Inventorie extends Model
    ];
 
 
-   public function scopeSearch($query, $name)
+   public function scopeSearch($query, $article_id)
    {
-   	return $query->where('name', 'LIKE', "%$name%");
+   	return $query->where('article_id', 'LIKE', "%$article_id%");
    }
 }

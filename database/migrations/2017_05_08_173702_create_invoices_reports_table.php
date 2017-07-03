@@ -17,13 +17,14 @@ class CreateInvoicesReportsTable extends Migration
             $table->increments('id'); //id
             $table-> integer('vehicle_id')->unsigned(); //id del vehiculo
             $table->string('number'); //numero de fatura
-            $table->string('name')->nullable(); //nombre
+            $table-> integer('client_id')->unsigned(); //nombre del cliente
             $table->float('total'); //total de la factura
             $table->integer('discount'); //descuento
             $table->time('hour'); // hora de la realizacion de la factura
             $table->string('observation')->nullable(); //observacion
             $table->timestamps();
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
+            $table->foreign('client_id')->references('id')->on('customers');
         });
     }
 

@@ -20,7 +20,7 @@ class VehiclesController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los vehiculos
-        $vehicles['vehiclee'] = Vehicle::search($request->license_plate_or_detail)->orderBy('id', 'DESC')->paginate(5);
+        $vehicles['vehiclee'] = Vehicle::search($request->license_plate_or_detail)->orderBy('id', 'ASC')->paginate();
         $vehicles['clieen'] = Customer::all();
         // en formato json
         //return response()->json($vehicles);
@@ -66,8 +66,7 @@ class VehiclesController extends Controller
     {
         // Recupera el registro de base de datos
         $vehicles = Vehicle::find($id);
-        $vehicles['clieen'] = Customer::find($vehicles->Customer_id);
-
+        $vehicles['clieen'] = Customer::find($vehicles->client_id);
             // Carga las vista y le pasa el "vehicle"
         return View::make('vehicles.show')
         ->with('vehiclee', $vehicles);

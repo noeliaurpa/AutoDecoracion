@@ -3,7 +3,7 @@
   <label for="nameClient">Nombre del cliente:</label>
   <select id="client_id" class="form-control" name="client_id" required autofocus>  
   @foreach($clieen as $key)
-    <option value="{{ $key->id }}">{{$key->name}}</option>
+    <option value="{{ $key->id }}">{{$key->name}} {{$key->tell}}</option>
   @endforeach  
   </select>
 </div>

@@ -18,20 +18,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php for ($i=1; $i <= 2; $i++): ?>
-			<?php
-				$total = 1180 * $i;
-				$subtotal = $total / 1.13;
-				$iva = $total - $subtotal;
-			?>
+			@foreach ($factura as $invoice)
 			<tr>
-				<td>client {{$i}}</td>
-				<th class="text-right">{{ number_format($iva, 2)}}</th>
-				<th class="text-right">{{ number_format($subtotal, 2)}}</th>
-				<th class="text-right">{{ number_format($total, 2)}}</th>
-				<th class="text-right">02/02/2017</th>
+				<td>{{$client->id}}</td>
+				<th class="text-right">{{$invoice->iv}}</th>
+				<th class="text-right">{{$invoice->subtotal}}</th>
+				<th class="text-right">{{$invoice->total}}</th>
+				<th class="text-right">{{$invoice->created_at}}</th>
 			</tr>
-			<?php endfor; ?>
+			@endforeach
 		</tbody>
 	</table>
 </div>

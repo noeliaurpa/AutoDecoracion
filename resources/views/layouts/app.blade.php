@@ -35,7 +35,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img class="logo" type="image" src="img/logo.jpg"></a>
+                <a class="navbar-brand" href="/"><img class="logo" type="image" src="{{ asset('img/logo.jpg') }}"></a>
             </div>
 
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="true">

@@ -131,6 +131,21 @@ Route::get('invoices/findClient{q?}', 'InvoiceReportController@findClient')->mid
 
 //***************************************************************************************
 
+
+// this route shows all providers in json format
+Route::get('inventory', 'InventoriesController@index')->middleware('auth');
+Route::get('inventory/{id}/show', 'InventoriesController@show')->middleware('auth');
+
+
+//***************************************************************************************
+
+// this route shows all providers in json format
+Route::get('smallbox', 'SmallboxesController@index')->middleware('auth');
+Route::get('smallbox/{id}/show', 'SmallboxesController@show')->middleware('auth');
+
+
+//***************************************************************************************
+
 //this route is for when any route not exist return home 
 Route::get('/{nombre?}', function ($nombre = null) {
 	if (is_null($nombre)) {
