@@ -9,26 +9,26 @@
 </div>
 <div class="form-group">
   <label for="license_plate_or_detail">Placa o Detalle:</label>
-  <input
+  <input maxlength ="7"
   type="text" name="license_plate_or_detail" class="form-control"
   value="{{ isset($vehiclee->license_plate_or_detail) ? $vehiclee->license_plate_or_detail : '' }}">
 </div>
 <div class="form-group">
   <label for="brand">Marca:</label>
-  <input 
-  type="text" name="brand" class="form-control" max= "8"
+  <input maxlength="50"
+  type="text" name="brand" class="form-control" 
   value="{{ isset($vehiclee->brand) ? $vehiclee->brand : '' }}">
 </div>
 <div class="form-group">
   <label for="model">Modelo:</label>
-  <input
-  type="text" name="model" class="form-control" maxlength= "100" 
+  <input maxlength="50"
+  type="text" name="model" class="form-control" 
   value="{{ isset($vehiclee->model) ? $vehiclee->model : '' }}">
 </div>
 <div class="form-group">
-  <label for="observation">Observacion:</label>
-  <input
-  type="text" name="observation" class="form-control" maxlength= "100" 
+  <label for="observation">Observación:</label>
+  <input maxlength="150"
+  type="text" name="observation" class="form-control" 
   value="{{ isset($vehiclee->observation) ? $vehiclee->observation : '' }}">
 </div>
 

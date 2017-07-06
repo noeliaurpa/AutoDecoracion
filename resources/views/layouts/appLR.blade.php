@@ -71,6 +71,7 @@
                         <li class = "dropdown"> <a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
                         <li class = "dropdown"> <a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
                         <li class = "dropdown"> <a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "dropdown"> <a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
                         <li class = "dropdown"> <a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                         <li>
                             <a href="{{ route('logout') }}"
@@ -92,6 +93,7 @@
                         <li class = "dropdown"><a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
                         <li class = "dropdown"><a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
                         <li class = "dropdown"><a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "dropdown"><a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
                         <li class = "dropdown"><a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                         <li>
                             <a href="{{ route('logout') }}"
@@ -127,6 +129,7 @@
                         <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 14%;" href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
                         <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 18% 8% 18%;" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
                         <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 13% 8% 13%;" href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 4% 8% 5%;" href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
                         <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                     </ul>
                 </div>

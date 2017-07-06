@@ -35,12 +35,12 @@ class ArticlesController extends Controller
      */
     public function create()
     {
+
         $articles['articlee'] = Article::all();
-        // en formato json
-        //return response()->json($Articles);
-        //return View('/Articles/index', $Articles);
+            // en formato json
         return View::make('articles.create')
         ->with($articles);
+        
     }
 
     /**
@@ -51,21 +51,27 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        $id = Article::create($request->all());
-        $idd = $id->id;
-        if($request->get('radSize') == 'inventario')
-        {
-            $Inventorie = new Inventorie;
-            $Inventorie->article_id = $idd;
-            $Inventorie->observation = null;
-            $Inventorie->save();
-        }else{
-            $Smallboxe = new Smallboxe;
-            $Smallboxe->article_id = $idd;
-            $Smallboxe->observation = null;
-            $Smallboxe->save();
+        try {
+            $id = Article::create($request->all());
+            $idd = $id->id;
+            if($request->get('radSize') == 'inventario')
+            {
+                $Inventorie = new Inventorie;
+                $Inventorie->article_id = $idd;
+                $Inventorie->observation = null;
+                $Inventorie->save();
+            }else{
+                $Smallboxe = new Smallboxe;
+                $Smallboxe->article_id = $idd;
+                $Smallboxe->observation = null;
+                $Smallboxe->save();
+            }
+            Session::flash('success_message', 'Se ha creado correctamente.');
+            return redirect('articles');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de crear el articulo');
+            return Redirect::to('articles');
         }
-        return redirect('articles');
     }
 
     /**
@@ -109,15 +115,21 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = Article::find($id);
+        try {
+            $articles = Article::find($id);
             //$Articles->name = Input::get('name');
-        $articles->name = $request->get('name');
-        $articles->code = $request->get('code');
-        $articles->sale_price = $request->get('sale_price');
-        $articles->purchase_price = $request->get('purchase_price');
-        $articles->unit_or_quantity = $request->get('unit_or_quantity');
-        $articles->save();
-        return Redirect::to('articles');
+            $articles->name = $request->get('name');
+            $articles->code = $request->get('code');
+            $articles->sale_price = $request->get('sale_price');
+            $articles->purchase_price = $request->get('purchase_price');
+            $articles->unit_or_quantity = $request->get('unit_or_quantity');
+            $articles->save();
+            Session::flash('update_message', 'Se actualizó correctamente.');
+            return Redirect::to('articles');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de actualizar el articulo');
+            return Redirect::to('articles');
+        }
     }
 
     /**
@@ -131,10 +143,21 @@ class ArticlesController extends Controller
         try {
             // delete
             $articles = Article::find($id);
-            $articles->delete();
+            $inventori = Inventorie::where('article_id', $id)->get();
+            $smallB = Smallboxe::where('article_id', $id)->get();
+            if(count($inventori) > 0){
+                $inventario = Inventorie::find($inventori[0]->id);
+                $inventario->delete();
+                $articles->delete();
+            }else{
+                $cajachica = Smallboxe::find($smallB[0]->id);
+                $cajachica->delete();
+                $articles->delete();
+            }
+            Session::flash('flash_message', 'Se eliminó correctamente.');
             return Redirect::to('articles');
         } catch (\Illuminate\Database\QueryException $e) {
-            Session::flash('flash_message', 'No se puede eliminar el articulo porque pertenece a el inventario o a la caja chica');
+            Session::flash('flash_message', 'Eliminaste un articulo por lo tanto se eliminó de la caja chica o del inventario');
             return Redirect::to('articles');
         }
     }

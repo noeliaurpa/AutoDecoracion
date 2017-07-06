@@ -18,6 +18,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//this routes is for control of users
+Route::get('users', 'UsersController@index')->middleware('auth');
+Route::get('users/{id}/edit', 'UsersController@edit')->middleware('auth');
+Route::match(['put', 'patch'], 'users/{id}', 'UsersController@update')->middleware('auth');
+Route::delete('users/{id}', 'UsersController@destroy')->middleware('auth');
+//****************************************************************************************
+
 // this is to go to the main page
 Route::get('/home', 'HomeController@index')->middleware('auth');;
 
@@ -44,7 +51,6 @@ Route::delete('Providers/{id}', 'ProviderController@destroy')->middleware('auth'
 
 //****************************************************************************************
 
-Route::resource('events', 'EventsController', ['only' => ['index', 'store', 'update', 'destroy']]);
 Route::resource('quotes', 'QuotesController', ['only' => ['index', 'store', 'update', 'destroy']]);
 
 //****************************************************************************************
@@ -102,32 +108,16 @@ Route::match(['put', 'patch'], 'vehicles/{id}', 'VehiclesController@update')->mi
 Route::delete('vehicles/{id}', 'VehiclesController@destroy')->middleware('auth');
 
 //***************************************************************************************
-//this route is for send message to users when finish the decoration
-Route::get('send', 'Sms@index')->middleware('auth');
-Route::post('send/create', 'Sms@send')->middleware('auth');
-
-//****************************************************************************************
 
 // this route shows all invoices in json format
 Route::get('invoices', 'InvoiceReportController@index')->middleware('auth');
 
 Route::get('invoices/create', 'InvoiceReportController@create')->middleware('auth');
 
-Route::get('invoices/getdata', 'InvoiceReportController@getdata')->middleware('auth');
-
 Route::get('invoices/{id}/show', 'InvoiceReportController@show')->middleware('auth');
-Route::get('invoices/{id}/edit', 'InvoiceReportController@edit')->middleware('auth');
 
 //"invoices" for "post" to store a new record
 Route::post('invoices', 'InvoiceReportController@store')->middleware('auth');
-
-//"invoices/id" for "put" to update the registry by "id"
-Route::match(['put', 'patch'], 'invoices/{id}', 'InvoiceReportController@update')->middleware('auth');
-
-//"invoices/id" for "delete" to delete the registry by "id"
-Route::delete('invoices/{id}', 'InvoiceReportController@destroy')->middleware('auth');
-
-Route::get('invoices/findClient{q?}', 'InvoiceReportController@findClient')->middleware('auth');
 
 //***************************************************************************************
 
@@ -146,6 +136,27 @@ Route::get('smallbox/{id}/show', 'SmallboxesController@show')->middleware('auth'
 
 //***************************************************************************************
 
+// this route shows all message in json format
+Route::get('message', 'MessageController@index')->middleware('auth');
+
+Route::get('message/create', 'MessageController@create')->middleware('auth');
+Route::get('message/{id}/edit', 'MessageController@edit')->middleware('auth');
+
+//"message" for "post" to store a new record
+Route::post('message', 'MessageController@store')->middleware('auth');
+
+//"message/id" for "put" to update the registry by "id"
+Route::match(['put', 'patch'], 'message/{id}', 'MessageController@update')->middleware('auth');
+
+//"message/id" for "delete" to delete the registry by "id"
+Route::delete('message/{id}', 'MessageController@destroy')->middleware('auth');
+
+//***************************************************************************************
+//this route is for send message to users when finish the decoration
+Route::get('send', 'Sms@index')->middleware('auth');
+Route::post('send/create', 'Sms@send')->middleware('auth');
+
+//****************************************************************************************
 //this route is for when any route not exist return home 
 Route::get('/{nombre?}', function ($nombre = null) {
 	if (is_null($nombre)) {

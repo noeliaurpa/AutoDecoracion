@@ -20,4 +20,9 @@ class Smallboxe extends Model
    {
     return $query->where('article_id', 'LIKE', "%$article_id%");
    }
+
+   public function article()
+    {
+        return $this->belongsTo('App\Article');
+    }
 }

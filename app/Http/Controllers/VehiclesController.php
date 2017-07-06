@@ -9,6 +9,7 @@ use App\vehicle;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
+use Session;
 
 class VehiclesController extends Controller
 {
@@ -51,9 +52,14 @@ class VehiclesController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
-        Vehicle::create($request->all());
-        return redirect('vehicles');
+        try {
+            Vehicle::create($request->all());
+            Session::flash('success_message', 'Se ha creado correctamente.');
+            return redirect('vehicles');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de crear el registro de un vehículo');
+            return Redirect::to('vehicles');
+        }
     }
 
     /**
@@ -98,14 +104,20 @@ class VehiclesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $vehicles = Vehicle::find($id);
-        $vehicles->Customer_id = $request->get('Customer_id');
-        $vehicles->license_plate_or_detail   = $request->get('license_plate_or_detail    ');
-        $vehicles->brand = $request->get('brand');
-        $vehicles->model = $request->get('model');
-        $vehicles->observation = $request->get('observation');
-        $vehicles->save();
-        return Redirect::to('vehicles');
+        try {
+            $vehicles = Vehicle::find($id);
+            $vehicles->Customer_id = $request->get('Customer_id');
+            $vehicles->license_plate_or_detail   = $request->get('license_plate_or_detail    ');
+            $vehicles->brand = $request->get('brand');
+            $vehicles->model = $request->get('model');
+            $vehicles->observation = $request->get('observation');
+            $vehicles->save();
+            Session::flash('update_message', 'Se actualizó correctamente.');
+            return Redirect::to('vehicles');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de actualizar el vehículo');
+            return Redirect::to('vehicles');
+        }
     }
 
     /**
@@ -116,9 +128,15 @@ class VehiclesController extends Controller
      */
     public function destroy($id)
     {
-        // delete
-        $vehicles = Vehicle::find($id);
-        $vehicles->delete();
-        return Redirect::to('vehicles');
+        try {
+            // delete
+            $vehicles = Vehicle::find($id);
+            $vehicles->delete();
+            Session::flash('flash_message', 'Se eliminó correctamente.');
+            return Redirect::to('vehicles');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de eliminar el vehículo');
+            return Redirect::to('vehicles');
+        }
     }
 }

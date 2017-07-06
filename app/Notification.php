@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Invoicesarticle extends Model
+class Notification extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +12,12 @@ class Invoicesarticle extends Model
      * @var array
      */
     protected $fillable = [
-        'invoice_id', 'article_id', 'quantity','price', 'total'
+        'message'
     ];
 
-    public function article()
+
+    public function scopeSearch($query, $message)
     {
-        return $this->belongsTo('App\Article');
+    	return $query->where('message', 'LIKE', "%$message%");
     }
 }

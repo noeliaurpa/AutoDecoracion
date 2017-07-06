@@ -4,18 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TextMagicSMS\TextMagicAPI;
+use Session;
+use Illuminate\Support\Facades\Redirect;
+use App\Customer;
+use App\Notification;
+use Illuminate\Support\Facades\View;
 
 class Sms extends Controller
 {
 	public function index()
 	{
-		return view('sms');
-	}
+        $customers['cliennt'] = Customer::all();
+        $customers['mesage'] = Notification::all();
+        return View::make('sms')
+        ->with($customers);
+    }
 
-	public function send(Request $request)
-	{
-
-    //var_dump($request->tell);
+    public function send(Request $request)
+    {
         try {
             $api = new TextMagicAPI(array
                 (
@@ -24,9 +30,9 @@ class Sms extends Controller
                     )
                 );
 
-            $text = 'Noelia Sirvio';
+            $text = $request->message;
 
-            $numero = (float)$request->tell;
+            $numero = (float)$request->tellClient;
 
             $phones = array
             (
@@ -37,10 +43,11 @@ class Sms extends Controller
             $is_unicode = true;
 
             $api->send($text, $phones, $is_unicode);
-            
+            Session::flash('success_message','Se envió el mensaje correctamente.');
+            return Redirect::to('/home');
         } catch (\Exception $e) {
-            echo "No se puede enviar mensajes porque no tienes saldo suficiente. ".$e;
-            return view('/home');
+            Session::flash('flash_message','No se puede enviar mensajes porque no tienes saldo suficiente. '.$e);
+            return Redirect::to('/home');
         }
     }
 }

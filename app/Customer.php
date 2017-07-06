@@ -25,4 +25,9 @@ class Customer extends Model
     {
        return $query->where('name', 'LIKE', '%$q%');
     }
+
+    public function provider()
+    {
+        return $this->belongsTo('App\Provider');
+    }
 }

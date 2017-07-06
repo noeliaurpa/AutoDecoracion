@@ -14,4 +14,14 @@ class Invoicesreport extends Model
     protected $fillable = [
         'vehicle_id', 'number', 'client_id','total', 'subtotal', 'iv', 'observation'
     ];
+
+    public function client()
+    {
+    	return $this->belongsTo('App\Customer');
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo('App\Vehicle');
+    }
 }

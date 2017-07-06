@@ -48,7 +48,7 @@ img{
 
 .navbar-right {
   margin-right: 0px!important;
-  margin: 3px 0px 0px 1050px!important;
+  margin: 3px 0px 0px 1000px!important;
 }
 
 .lipadding{
@@ -358,11 +358,15 @@ hr{
   background: red;
   color: white;
   height: 58px;
-  width: 697px;;
-  margin: 6%;
+  width: 697px;
   padding: 3%;
-  border-radius: 34px;
   text-align: center;
+  
+  border:solid 1px #DEDEDE;
+  background:#EFEFEF;
+  color:#222222;
+  padding:4px;
+  text-align:center;
 }
 
 table{
@@ -488,3 +492,7 @@ table{
   width: 397px!important;
 }
 
+.quantityN{
+  background-color: #EB1D1D;
+  border-radius: 5%!important;
+}

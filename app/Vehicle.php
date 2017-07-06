@@ -26,8 +26,8 @@ class Vehicle extends Model
         return $query->where('id', 'LIKE', "%$id%");
     }
 
-    public function clients()
+    public function client()
     {
-        return $this->hasMany('App\Customer');
+        return $this->belongsTo('App\Customer');
     }
 }

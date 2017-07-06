@@ -1,10 +1,37 @@
 @extends('layouts.appLR')
-
+<!--this two lines are for drop down the menu-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--........................................-->
 @section('content')
 @parent
 <div class="col-md-10 col-xs-10">
 
 	<h1 style="text-align:center;">Listado de clientes</h1>
+	<div class="input-group">
+		@if(Session::has('flash_message'))
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡ATENCIÓN!</strong> {{Session::get('flash_message')}}.
+		</div>
+		@endif
+	</div>
+	<div class="input-group">
+        @if(Session::has('success_message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('success_message')}}.
+        </div>
+        @endif
+    </div>
+    <div class="input-group">
+        @if(Session::has('update_message'))
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('update_message')}}.
+        </div>
+        @endif
+    </div>
 	<?php echo Form::open(['url' => 'customers', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
@@ -19,7 +46,7 @@
 			<tr class="backtabletr">
 				<th>Nombre del proveedor</th>
 				<th>Nombre del cliente</th>
-				<th>Telefono</th>
+				<th>Teléfono</th>
 				<th>Ver</th>
 				<th>Editar</th>
 				<th>Eliminar</th>
@@ -27,9 +54,15 @@
 			@foreach ($cliennt as $client)
 			<tr class="backtabletd"> 
 				{{-- Columna NOMBRE del cliente --}}
+				@if($client->provider_id == null)
 				<td>
-					{{ $client->provider_id }}
+					
 				</td>
+				@else
+				<td>
+					{{$client->provider->name}}
+				</td>
+				@endif
 				<td>
 					{{ $client->name }}
 				</td>
@@ -71,7 +104,7 @@
 	<tr class="backtabletr">
 		<th>Nombre del proveedor</th>
 		<th>Nombre del cliente</th>
-		<th>Telefono</th>
+		<th>Teléfono</th>
 		<th>Ver</th>
 	</tr>
 	@foreach ($cliennt as $client)
@@ -113,12 +146,5 @@ class="btn btn-primary btn-sm">
 Inicio
 </a>
 
-</div>
-<div class="input-group">
-	@if(Session::has('flash_message'))
-	<div class="mensaje">
-	{{Session::get('flash_message')}}
-	</div>
-	@endif
 </div>
 @stop

@@ -126,7 +126,8 @@
                             <button type="submit" class="btn btn-primary">
                                 Registrar
                             </button>
-                            <a class="btn btn-primary" href="{{ URL::to('/home') }}">Cancelar</a>
+                            <a class="btn btn-primary" href="{{ URL::to('/users') }}">Ver Usuario</a>
+                            <a class="btn btn-danger" href="{{ URL::to('/home') }}">Cancelar</a>
                         </div>
                     </div>
                 </form>

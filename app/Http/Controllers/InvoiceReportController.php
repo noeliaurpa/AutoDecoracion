@@ -27,8 +27,6 @@ class InvoiceReportController extends Controller
     {
         // recupera todos los registros de las facturas
         $invoices['factura'] = Invoicesreport::all();
-        $invoices['client'] = Customer::where('id',$invoices['factura'][0]->client_id)->get();
-        var_dump($invoices->client);
         return view('invoices/index' , $invoices);
     }
 
@@ -79,38 +77,16 @@ class InvoiceReportController extends Controller
                 $facturaArticulo->total = $request->detail[$i+3];
                 $facturaArticulo->save();
                 $i= $i+3;
+                $artic = Article::find($Article[0]->id);
+                $quantityUpdate = $Article[0]->unit_or_quantity - $facturaArticulo->quantity;
+                $artic->unit_or_quantity = $quantityUpdate;
+                $artic->save();
             }
         } catch (Exception $e) {
 
         }
 
     }
-    /**
-     * .
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function findVehicle(Request $request)
-    {
-        //$vehicles['vehiclee'] = Vehicle::search($request->license_plate_or_detail)->orderBy('id', 'DESC')->paginate(5);
-        $vehicles['vehiculo'] = Vehicle::vehicle($request->id)->orderBy('id', 'DESC');
-        var_dump($vehicles);
-        //return $vehicles;
-    }
-
-    /**
-     * .
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function findClient(Request $request)
-    {
-        //$clients['client'] = Customer::name($request->name)->orderBy('id', 'DESC');
-        var_dump(Customer::search($request->name)->orderBy('id', 'DESC'));
-        //return $clients;
-    }
-
-    
     /**
      * Display the specified resource.
      *
@@ -119,40 +95,10 @@ class InvoiceReportController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $invoice = Invoicesreport::find($id);
+        $invoice['invoicearticle'] = Invoicesarticle::where('invoice_id',$invoice->id)->get();
+            // Carga las vista y le pasa el "vehicle"
+        return View::make('invoices.show')
+        ->with('invoicereport', $invoice);
     }
 }

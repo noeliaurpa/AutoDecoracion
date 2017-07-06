@@ -1,10 +1,37 @@
 @extends('layouts.appLR')
-
+<!--this two lines are for drop down the menu-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--........................................-->
 @section('content')
 
 <div class="col-md-10 col-xs-10">
 
 	<h1 style="text-align:center;">Listado de Proveedores</h1>
+	<div class="input-group">
+		@if(Session::has('flash_message'))
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡ATENCIÓN!</strong> {{Session::get('flash_message')}}.
+		</div>
+		@endif
+	</div>
+	<div class="input-group">
+        @if(Session::has('success_message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('success_message')}}.
+        </div>
+        @endif
+    </div>
+    <div class="input-group">
+        @if(Session::has('update_message'))
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('update_message')}}.
+        </div>
+        @endif
+    </div>
 	<?php echo Form::open(['url' => 'Providers', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
@@ -18,9 +45,9 @@
 		<table  class="table table-hover">
 			<tr class="backtabletr">
 				<th>Nombre</th>
-				<th>Telefono</th>
-				<th>Direccion</th>
-				<th>Correo Electronico</th>
+				<th>Teléfono</th>
+				<th>Dirección</th>
+				<th>Correo Electrónico</th>
 				<th>Ver</th>
 				<th>Editar</th>
 				<th>Eliminar</th>
@@ -119,6 +146,5 @@ Registrar nuevo proveedor
 class="btn btn-primary btn-sm">
 Inicio
 </a>
-
 </div>
 @stop

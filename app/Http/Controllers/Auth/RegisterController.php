@@ -63,6 +63,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
+
+    /*
+
+    se cambio el archivo RegisterUser en esta direccion: ...\vendor\laravel\framework\src\Illuminate\Foundation\Auth\RegistersUsers.php
+
+    */
     protected function create(array $data)
     {
         return User::create([

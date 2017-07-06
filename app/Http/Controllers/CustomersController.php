@@ -22,7 +22,6 @@ class CustomersController extends Controller
     {
         // recupera todos los registros de los artistas
         $customers['cliennt'] = Customer::search($request->name)->orderBy('id', 'ASC')->paginate();
-        $customers['proveer'] = Provider::all();
         return View('/customers/index', $customers);
     }
 
@@ -47,9 +46,14 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
-        Customer::create($request->all());
-        return redirect('customers');
+        try {
+            Customer::create($request->all());
+            Session::flash('success_message', 'Se ha creado correctamente.');
+            return redirect('customers');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de crear al cliente');
+            return Redirect::to('customers');
+        }
     }
 
     /**
@@ -96,13 +100,19 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customers = Customer::find($id);
-        $customers->provider_id = $request->get('provider_id');
-        $customers->name = $request->get('name');
-        $customers->tell = $request->get('tell');
-        $customers->observation = $request->get('observation');
-        $customers->save();
-        return Redirect::to('customers');
+        try {
+            $customers = Customer::find($id);
+            $customers->provider_id = $request->get('provider_id');
+            $customers->name = $request->get('name');
+            $customers->tell = $request->get('tell');
+            $customers->observation = $request->get('observation');
+            $customers->save();
+            Session::flash('update_message', 'Se actualizó correctamente.');
+            return Redirect::to('customers');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de actualizar al cliente');
+            return Redirect::to('customers');
+        }
     }
 
     /**
@@ -117,9 +127,10 @@ class CustomersController extends Controller
             // delete
             $customers = Customer::find($id);
             $customers->delete();
+            Session::flash('flash_message', 'Se eliminó correctamente.');
             return Redirect::to('customers');
         } catch (\Illuminate\Database\QueryException $e) {
-            Session::flash('flash_message', 'No se puede eliminar el proveedor porque un cliente lo está utilizando');
+            Session::flash('flash_message', 'No se pudo eliminar el cliente');
             return Redirect::to('customers');
         }
     }

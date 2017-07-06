@@ -1,5 +1,8 @@
 @extends('layouts.appLR')
-
+<!--this two lines are for drop down the menu-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--........................................-->
 @section('content')
 @parent
 <div class="col-md-10 col-xs-10">
@@ -7,88 +10,88 @@
 		Nueva Factura
 	</h2>
 	<!--form action=" {{ url('/invoices') }}" method="post">
-		<input type="hidden" name="_token" value="{{ csrf_token() }}"-->
-		<div class="well well-sm">
-			<div class="row">
-				<div class="col-xs-10">
-					<input id="nameClient" name="nameClient" class="form-control" type="text" placeholder="Nombre del cliente"/>
-				</div>
-				<div class="col-xs-2">
-					<input id="numInvoice" name="numInvoice" class="form-control" type="text" placeholder="numero de factura" readonly>
-				</div>
+	<input type="hidden" name="_token" value="{{ csrf_token() }}"-->
+	<div class="well well-sm">
+		<div class="row">
+			<div class="col-xs-10">
+				<input id="nameClient" name="nameClient" class="form-control" type="text" placeholder="Nombre del cliente"/>
 			</div>
-			<hr>
-			<div class="row">
-				<div class="col-xs-4">
-					<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo" readonly/>
-				</div>
-				<div class="col-xs-4">
-					<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo" readonly/>
-				</div>
-				<div class="col-xs-4">
-					<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" data-multiple/>
-					<ul id="mylicense" hidden >
-						@foreach($vehicle as $key)
-						<li id="plate" name="{{ $key->id }}" value="{{ $key->license_plate_or_detail }}">{{$key->license_plate_or_detail}}</li>
-						@endforeach 
-					</ul>
-				</div>
+			<div class="col-xs-2">
+				<input id="numInvoice" name="numInvoice" class="form-control" type="text" placeholder="numero de factura" readonly>
 			</div>
 		</div>
+		<hr>
 		<div class="row">
-			<div class="col-xs-7">
-				<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo" data-list="#myarticle" data-multiple>
-				<ul id="myarticle" hidden>
-					@foreach($article as $key)
-					<li id="articles" name="{{ $key->id }}" value="{{ $key->name }}">{{$key->name}}</li>
-					@endforeach
+			<div class="col-xs-4">
+				<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo" readonly/>
+			</div>
+			<div class="col-xs-4">
+				<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo" readonly/>
+			</div>
+			<div class="col-xs-4">
+				<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" data-multiple />
+				<ul id="mylicense" hidden >
+					@foreach($vehicle as $key)
+					<li id="plate" name="{{ $key->id }}" value="{{ $key->license_plate_or_detail }}">{{$key->license_plate_or_detail}}</li>
+					@endforeach 
 				</ul>
 			</div>
-			<div class="col-xs-2">
-				<input id="quantity" class="form-control" type="number" placeholder="cantidad">
-			</div>
-			<div class="col-xs-2">
-				<input id="price" class="form-control" type="text" placeholder="Precio">	
-			</div>
-			<div class="col-xs-1">
-				<a onclick="add(this)" class="btn btn-primary form-control" id="btn-agregar">
-					<span class="glyphicon glyphicon-plus"></span>
-				</a>
-			</div>
 		</div>
-
-		<hr/>
-
-		<table name="detailInvoice" id="detailInvoice" class="table table-striped">
-			<thead>
-				<tr>
-					<th style="width:40px"></th>
-					<th>Articulo</th>
-					<th style="width:100px">Cantidad</th>
-					<th style="width:100px">Precio</th>
-					<th style="width:100px">Total</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="4" class="text-right"><b>Impuesto de venta ₡</b></td>
-					<td name="IV" id="impuestoDVenta" class="text-right">0</td>
-				</tr>
-				<tr>
-					<td colspan="4" class="text-right"><b>Sub total ₡</b></td>
-					<td id="subtotal" class="text-right">0</td>
-				</tr>
-				<tr>
-					<td colspan="4" class="text-right"><b>Total ₡</b></td>
-					<td id="total" class="text-right">0</td>
-				</tr>
-			</tfoot>
-		</table>
-		<div>
-			<button onclick="saveData()" class="btn btn-primary form-control">Guardar</button>
+	</div>
+	<div class="row">
+		<div class="col-xs-7">
+			<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo" data-list="#myarticle" data-multiple>
+			<ul id="myarticle" hidden>
+				@foreach($article as $key)
+				<li id="articles" name="{{ $key->id }}" value="{{ $key->name }}">{{$key->name}}</li>
+				@endforeach
+			</ul>
 		</div>
+		<div class="col-xs-2">
+			<input id="quantity" class="form-control" type="number" placeholder="cantidad">
+		</div>
+		<div class="col-xs-2">
+			<input id="price" class="form-control" type="text" placeholder="Precio">	
+		</div>
+		<div class="col-xs-1">
+			<a onclick="add(this)" class="btn btn-primary form-control" id="btn-agregar">
+				<span class="glyphicon glyphicon-plus"></span>
+			</a>
+		</div>
+	</div>
+
+	<hr/>
+
+	<table name="detailInvoice" id="detailInvoice" class="table table-striped">
+		<thead>
+			<tr>
+				<th style="width:40px"></th>
+				<th>Artículo</th>
+				<th style="width:100px">Cantidad</th>
+				<th style="width:100px">Precio</th>
+				<th style="width:100px">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4" class="text-right"><b>Impuesto de venta ₡</b></td>
+				<td name="IV" id="impuestoDVenta" class="text-right">0</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="text-right"><b>Sub total ₡</b></td>
+				<td id="subtotal" class="text-right">0</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="text-right"><b>Total ₡</b></td>
+				<td id="total" class="text-right">0</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div>
+		<button onclick="saveData()" class="btn btn-primary form-control">Guardar</button>
+	</div>
 	<!--/form-->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -102,7 +105,6 @@ document.getElementById('license').addEventListener('awesomplete-selectcomplete'
 	var vehi = vehicle.split("&quot;");
 	var cli = client.split("&quot;");
 	// hice un for para recorrer los vehículos
-	var numero = 0;
 	for (var i = 0; i <= vehi.length; i++) {
 		//si donde está seleccionado es igual al texto del input con el id license
 		if(vehi[i] == document.getElementById("license").value){
@@ -114,11 +116,11 @@ document.getElementById('license').addEventListener('awesomplete-selectcomplete'
 				if(cli[y] == "provider_id"){
 					y++;
 				}else{
-
 				//si donde está seleccionado es igual a el id del clientes que tiene el vehículo seleccionado
-				if(cli[y] == vehi[i-5]){
+				if(cli[y] == vehi[i-3]){
 					//se coloca el nombre del cliente en el input que tiene el ip nameClien
 					document.getElementById("nameClient").value = cli[y+3];
+					//document.getElementById("numInvoice").value = "000"+cli[y].split(":")[1].split(",")[0];
 				}else{
 				}
 
@@ -255,20 +257,28 @@ function saveData(){
 		arreglo.push(miCelda3);
 		arreglo.push(miCelda4);
 	};
+	if(document.getElementById('nameClient').value == ""){
+		alert("Se requiere el nombre del cliente");
+	}else if(document.getElementById('license').value == ""){
+		alert("Se requiere el numero de placa");
+	}else if(arreglo.length == 0){
+		alert("No se puede completar la factura sin articulos");
+	}else{
+		$.post(BASEURL + '/invoices', {
+			nameC: document.getElementById("nameClient").value,
+			brand: document.getElementById("brand").value,
+			model: document.getElementById("model").value,
+			license: document.getElementById("license").value,
+			numInvoice: document.getElementById("numInvoice").value,
+			iv: document.getElementById("impuestoDVenta").innerHTML,
+			sbt: document.getElementById("subtotal").innerHTML,
+			tot: document.getElementById("total").innerHTML,
+			detail: arreglo,
+		}, function (r) {
+			return window.location.href = BASEURL + '/invoices';
+		});
+	}
 
-	$.post(BASEURL + '/invoices', {
-		nameC: document.getElementById("nameClient").value,
-		brand: document.getElementById("brand").value,
-		model: document.getElementById("model").value,
-		license: document.getElementById("license").value,
-		numInvoice: document.getElementById("numInvoice").value,
-		iv: document.getElementById("impuestoDVenta").innerHTML,
-		sbt: document.getElementById("subtotal").innerHTML,
-		tot: document.getElementById("total").innerHTML,
-		detail: arreglo,
-	}, function (r) {
-		return window.location.href = BASEURL + '/invoices';
-	});
 }
 
 function createRemoveBtn() {

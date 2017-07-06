@@ -1,5 +1,8 @@
 @extends('layouts.appLR')
-
+<!--this two lines are for drop down the menu-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--........................................-->
 @section('content')
 @parent
 <div class="col-md-10 col-xs-10">
@@ -17,14 +20,24 @@
 		@if (Auth::user()->workstation == "Administrador")
 		<table  class="table table-hover">
 			<tr class="backtabletr">
-				<th>Nombre del articulo</th>
+				<th>Nombre del artículo</th>
+				<th>Cantidad</th>
 				<th>ver</th>
 			</tr>
 			@foreach ($smallbox as $smallb)
 			<tr class="backtabletd"> 
-				{{-- Columna DATOS del smallb --}}
+				{{-- Columna DATOS de la caja chica --}}
+				@if($smallb->article->unit_or_quantity <= 0)
+				<td class="quantityN">
+					{{ $smallb->article->name }}
+				</td>
+				@else
 				<td>
-					{{ $smallb->article_id }}
+					{{ $smallb->article->name }}
+				</td>
+				@endif
+				<td>
+					{{ $smallb->article->unit_or_quantity }} metros
 				</td>
 				{{-- Columna botón SHOW --}}
 				<td>
@@ -39,7 +52,8 @@
 	@else
 	<table  class="table table-hover">
 		<tr class="backtabletr">
-			<th>Nombre del articulo</th>
+			<th>Nombre del artículo</th>
+			<th>Cantidad</th>
 			<th>ver</th>
 		</tr>
 		@foreach ($smallbox as $smallb)
@@ -47,6 +61,9 @@
 			{{-- Columna DATOS del Inventario --}}
 			<td>
 				{{ $smallb->article_id }}
+			</td>
+			<td>
+				{{ $smallb->article->unit_or_quantity }} metros
 			</td>
 			{{-- Columna botón SHOW --}}
 			<td>
@@ -61,7 +78,7 @@
 @endif
 </div>
 @else
-<p>No se encontró ningún registro de vehiculos</p>
+<p>No se encontró ningún artículo con ese nombre</p>
 @endif
 
 @if (Auth::user()->workstation == "Administrador")

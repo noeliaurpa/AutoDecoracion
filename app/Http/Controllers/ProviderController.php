@@ -8,6 +8,7 @@ use App\Provider;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
+use Session;
 
 class ProviderController extends Controller
 {
@@ -43,8 +44,14 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        Provider::create($request->all());
-        return redirect('Providers');
+        try {
+            Provider::create($request->all());
+            Session::flash('success_message', 'Se ha creado correctamente.');
+            return redirect('Providers');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de crear un proveedor');
+            return Redirect::to('Providers');
+        }
     }
 
     /**
@@ -88,16 +95,22 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $providers = Provider::find($id);
+        try {
+            $providers = Provider::find($id);
             //$providers->name = Input::get('name');
-        $providers->name = $request->get('name');
-        $providers->number_provider = $request->get('number_provider');
-        $providers->address_provider = $request->get('address_provider');
-        $providers->email = $request->get('email');
-        $providers->fax_provider = $request->get('fax_provider');
-        $providers->observation = $request->get('observation');
-        $providers->save();
-        return Redirect::to('Providers');
+            $providers->name = $request->get('name');
+            $providers->number_provider = $request->get('number_provider');
+            $providers->address_provider = $request->get('address_provider');
+            $providers->email = $request->get('email');
+            $providers->fax_provider = $request->get('fax_provider');
+            $providers->observation = $request->get('observation');
+            $providers->save();
+            Session::flash('update_message', 'Se actualizó correctamente.');
+            return Redirect::to('Providers');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de modificar un proveedor');
+            return Redirect::to('Providers');
+        }
     }
 
     /**
@@ -108,9 +121,15 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-        // delete
-        $providers = Provider::find($id);
-        $providers->delete();
-        return Redirect::to('Providers');
+        try {
+            // delete
+            $providers = Provider::find($id);
+            $providers->delete();
+            Session::flash('flash_message', 'Se eliminó correctamente.');
+            return Redirect::to('Providers');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'Hubo un error a la hora de eliminar un proveedor');
+            return Redirect::to('Providers');
+        }
     }
 }

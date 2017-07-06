@@ -3,12 +3,28 @@
 @section('content')
 
 <div class="col-md-8 col-xs-8">
+    <div class="input-group">
+        @if(Session::has('flash_message'))
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡ATENCIÓN!</strong> {{Session::get('flash_message')}}.
+        </div>
+        @endif
+    </div>
+    <div class="input-group">
+        @if(Session::has('success_message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('success_message')}}.
+        </div>
+        @endif
+    </div>
     <div class="row rowCalendar">
         <div id="calendar"></div>
     </div>
 </div>
 <div class="col-md-2 col-xs-2">
-   <div class="container">
+ <div class="container">
 
     {!! Form::open(['route' => 'quotes.store', 'method' => 'post', 'role' => 'form']) !!}
     <div id="responsive-modal" class="modal fade" tabindex="-1" data-backdrop="static">
@@ -21,7 +37,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         {!! Form::label('title', 'Nombre de la persona') !!}
-                        {!! Form::text('title', old('title'), ['class' => 'form-control', 'required' => 'required']) !!}
+                        {!! Form::text('title', old('title'), ['class' => 'form-control', 'required' => 'required', 'maxlength' => '100']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('date_start', 'Fecha de inicio') !!}
