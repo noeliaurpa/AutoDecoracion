@@ -18,8 +18,8 @@ class CreateInvoicesArticlesTable extends Migration
             $table->integer('invoice_id')->unsigned(); //id del reporte de factura
             $table->integer('article_id')->unsigned(); //id del articulo
             $table->integer('quantity'); //cantidad de articulos
-            $table->float('price'); // precio del producto
-            $table->float('total'); //suma de los productos
+            $table->float('price', 9, 2); // precio del producto
+            $table->float('total', 9, 2); //suma de los productos
             $table->timestamps();
             $table->foreign('invoice_id')->references('id')->on('invoicesReports');
             $table->foreign('article_id')->references('id')->on('articles');

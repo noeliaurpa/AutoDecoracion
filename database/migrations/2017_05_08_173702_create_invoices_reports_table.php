@@ -18,9 +18,9 @@ class CreateInvoicesReportsTable extends Migration
             $table-> integer('vehicle_id')->unsigned(); //id del vehiculo
             $table->string('number'); //numero de fatura
             $table-> integer('client_id')->unsigned(); //nombre del cliente
-            $table->float('total'); //total de la factura
-            $table->integer('discount'); //descuento
-            $table->time('hour'); // hora de la realizacion de la factura
+            $table->float('total', 9, 2); //total de la factura
+            $table->float('subtotal', 9, 2); //subtotal de la factura
+            $table->float('iv'); // impuesto de venta de la factura
             $table->string('observation')->nullable(); //observacion
             $table->timestamps();
             $table->foreign('vehicle_id')->references('id')->on('vehicles');
