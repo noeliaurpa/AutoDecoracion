@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use PDF;
+use Illuminate\Support\Facades\View;
 
 class ReportsController extends Controller
 {
@@ -15,9 +16,7 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        $clients = Customer::all();
-        $pdf = PDF::loadView('reports', ['clients' => $clients]);
-        return $pdf->download('clients.pdf');
+        return View('/reports/index');
     }
 
     /**
@@ -27,7 +26,9 @@ class ReportsController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Customer::all();
+        $pdf = PDF::loadView('reports', ['clients' => $clients]);
+        return $pdf->download('clients.pdf');
     }
 
     /**
