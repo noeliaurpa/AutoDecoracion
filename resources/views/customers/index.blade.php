@@ -17,21 +17,21 @@
 		@endif
 	</div>
 	<div class="input-group">
-        @if(Session::has('success_message'))
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Excelente!</strong> {{Session::get('success_message')}}.
-        </div>
-        @endif
-    </div>
-    <div class="input-group">
-        @if(Session::has('update_message'))
-        <div class="alert alert-info">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Excelente!</strong> {{Session::get('update_message')}}.
-        </div>
-        @endif
-    </div>
+		@if(Session::has('success_message'))
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡Excelente!</strong> {{Session::get('success_message')}}.
+		</div>
+		@endif
+	</div>
+	<div class="input-group">
+		@if(Session::has('update_message'))
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡Excelente!</strong> {{Session::get('update_message')}}.
+		</div>
+		@endif
+	</div>
 	<?php echo Form::open(['url' => 'customers', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
@@ -42,7 +42,7 @@
 	<div class="table-responsive">
 		@if(count($cliennt)>0)
 		@if (Auth::user()->workstation == "Administrador")
-		<table  class="table table-hover">
+		<table class="table table-striped">
 			<tr class="backtabletr">
 				<th>Nombre del proveedor</th>
 				<th>Nombre del cliente</th>
@@ -110,9 +110,15 @@
 	@foreach ($cliennt as $client)
 	<tr class="backtabletd"> 
 		{{-- Columna NOMBRE del cliente --}}
+		@if($client->provider_id == null)
 		<td>
-			{{ $client->provider_id }}
+			
 		</td>
+		@else
+		<td>
+			{{$client->provider->name}}
+		</td>
+		@endif
 		<td>
 			{{ $client->name }}
 		</td>
@@ -121,7 +127,7 @@
 		</td>
 		{{-- Columna botón SHOW --}}
 		<td>
-			<a class="btn btn-default btn-sm"
+			<a class="btn btn-prin btn-sm"
 			href="{{ URL::to('customers/' . $client->id) . '/show' }}" role="button">
 			<span class="glyphicon glyphicon-eye-open"></span>
 		</a>
@@ -137,12 +143,12 @@
 
 @if (Auth::user()->workstation == "Administrador")
 <a href="{{ url('/customers/create') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Registrar nuevo cliente
 </a>
 @endif
 <a href="{{ url('/home') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Inicio
 </a>
 

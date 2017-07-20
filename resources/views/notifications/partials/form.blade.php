@@ -8,5 +8,5 @@
 <!-- Buttons -->
 <div class="form-group">
   <button type="submit" class="btn btn-primary">{{ $submitButtonText }}</button>
-  <a class="btn btn-primary" href="{{ URL::to('message/') }}">Cancelar</a>
+  <a class="btn btn-danger" href="{{ URL::to('message/') }}">Cancelar</a>
 </div>

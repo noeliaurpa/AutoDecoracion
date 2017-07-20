@@ -34,7 +34,7 @@
 	<div class="table-responsive">
 		@if(count($messaje)>0)
 		@if (Auth::user()->workstation == "Administrador")
-		<table  class="table table-hover">
+		<table class="table table-striped">
 			<tr class="backtabletr">
 				<th>Mensaje</th>
 				<th>Editar</th>
@@ -91,16 +91,16 @@
 
 @if (Auth::user()->workstation == "Administrador")
 <a href="{{ url('/message/create') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Registrar nuevo mensaje
 </a>
+@endif
 <a href="{{ url('/send') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Enviar notificación al cliente
 </a>
-@endif
 <a href="{{ url('/home') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Inicio
 </a>
 

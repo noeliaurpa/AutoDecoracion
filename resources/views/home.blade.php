@@ -120,11 +120,11 @@
 </div>
 </div>
 {!! Html::script('js/app.js') !!}
-{!! Html::script('vendor/seguce92/fullcalendar/lib/moment.min.js') !!}
-{!! Html::script('vendor/seguce92/fullcalendar/fullcalendar.min.js') !!}
-{!! Html::script('vendor/seguce92/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
-{!! Html::script('vendor/seguce92/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') !!}
-{!! Html::script('vendor/seguce92/fullcalendar/locale/es.js') !!}
+{!! Html::script('variety/styles/fullcalendar/lib/moment.min.js') !!}
+{!! Html::script('variety/styles/fullcalendar/fullcalendar.min.js') !!}
+{!! Html::script('variety/styles/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') !!}
+{!! Html::script('variety/styles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') !!}
+{!! Html::script('variety/styles/fullcalendar/locale/es.js') !!}
 <script>
 
 var BASEURL = "{{ url('/') }}"

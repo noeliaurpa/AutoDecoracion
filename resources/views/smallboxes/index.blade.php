@@ -18,7 +18,7 @@
 	<div class="table-responsive">
 		@if(count($smallbox)>0)
 		@if (Auth::user()->workstation == "Administrador")
-		<table  class="table table-hover">
+		<table class="table table-striped">
 			<tr class="backtabletr">
 				<th>Nombre del artículo</th>
 				<th>Cantidad</th>
@@ -59,15 +59,21 @@
 		@foreach ($smallbox as $smallb)
 		<tr class="backtabletd">
 			{{-- Columna DATOS del Inventario --}}
-			<td>
-				{{ $smallb->article_id }}
+			@if($smallb->article->unit_or_quantity <= 0)
+			<td class="quantityN">
+				{{ $smallb->article->name }}
 			</td>
+			@else
+			<td>
+				{{ $smallb->article->name }}
+			</td>
+			@endif
 			<td>
 				{{ $smallb->article->unit_or_quantity }} metros
 			</td>
 			{{-- Columna botón SHOW --}}
 			<td>
-				<a class="btn btn-default btn-sm"
+				<a class="btn btn-prin btn-sm"
 				href="{{ URL::to('smallbox/' . $smallb->id) . '/show' }}" role="button">
 				<span class="glyphicon glyphicon-eye-open"></span>
 			</a>
@@ -85,7 +91,7 @@
 
 @endif
 <a href="{{ url('/home') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Inicio
 </a>
 

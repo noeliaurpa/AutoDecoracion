@@ -42,7 +42,7 @@
 	<div class="table-responsive">
 		@if(count($articlee)>0)
 		@if (Auth::user()->workstation == "Administrador")
-		<table  class="table table-hover">
+		<table class="table table-striped">
 			<tr class="backtabletr">
 				<th>Código</th>
 				<th>Nombre del artículo</th>
@@ -137,7 +137,7 @@
 		</td>
 		{{-- Columna botón SHOW --}}
 		<td>
-			<a class="btn btn-default btn-sm"
+			<a class="btn btn-prin btn-sm"
 			href="{{ URL::to('articles/' . $artic->id) . '/show' }}" role="button">
 			<span class="glyphicon glyphicon-eye-open"></span>
 		</a>
@@ -153,12 +153,12 @@
 
 @if (Auth::user()->workstation == "Administrador")
 <a href="{{ url('/articles/create') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Registrar nuevo artículo
 </a>
 @endif
 <a href="{{ url('/home') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Inicio
 </a>
 

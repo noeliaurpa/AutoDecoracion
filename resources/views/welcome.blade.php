@@ -33,9 +33,9 @@
           @if (Route::has('register'))
           <div class="top-right links">
             @if (Auth::check())
-            <a class="btn btn-default linksHomeH" href="{{ url('/home') }}">Home</a>
+            <a class="btn btn-primary linksHome" href="{{ url('/home') }}">Home</a>
             @else
-            <a class="btn btn-default linksHome" href="{{ url('/login') }}">Iniciar Sesion</a>
+            <a class="btn btn-primery linksHome" href="{{ url('/login') }}">Iniciar Sesion</a>
             @endif
           </div>
           @endif
@@ -54,8 +54,6 @@
         <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#bs-carousel" data-slide-to="1"></li>
-          <li data-target="#bs-carousel" data-slide-to="2"></li>
         </ol>
         
         <!-- Wrapper for slides -->
@@ -63,24 +61,6 @@
           <div class="item slides active">
             <div class="slide-1"></div>
             <div class="hero">
-              <hgroup>
-                <h1>Estamos ubicados:</h1>        
-                <h3>100 metros este de la concretera Palmares</h3>
-              </hgroup>
-            </div>
-          </div>
-          <div class="item slides">
-            <div class="slide-2"></div>
-            <div class="hero">        
-              <hgroup>
-                <h1>Estamos ubicados:</h1>        
-                <h3>100 metros este de la concretera Palmares</h3>
-              </hgroup>
-            </div>
-          </div>
-          <div class="item slides">
-            <div class="slide-3"></div>
-            <div class="hero">        
               <hgroup>
                 <h1>Estamos ubicados:</h1>        
                 <h3>100 metros este de la concretera Palmares</h3>

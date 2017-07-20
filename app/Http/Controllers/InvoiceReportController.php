@@ -9,6 +9,9 @@ use App\Customer;
 use App\Article;
 use App\Invoicesreport;
 use App\Invoicesarticle;
+use PDF;
+use Session;
+use Illuminate\Support\Facades\Redirect;
 
 class InvoiceReportController extends Controller
 {
@@ -64,6 +67,7 @@ class InvoiceReportController extends Controller
             $factura->total = $request->tot;
             $factura->subtotal = $request->sbt;
             $factura->iv = $request->iv;
+            $factura->state = 1;
             $factura->save();
 
             $invoiceReport = Invoicesreport::all();
@@ -100,5 +104,27 @@ class InvoiceReportController extends Controller
             // Carga las vista y le pasa el "vehicle"
         return View::make('invoices.show')
         ->with('invoicereport', $invoice);
+    }
+
+    public function download($id)
+    {
+        $invoice = Invoicesreport::find($id);
+        $invoice['invoicearticle'] = Invoicesarticle::where('invoice_id',$invoice->id)->get();
+        $pdf = PDF::loadView('invoice_reports', ['invoicereport' => $invoice]);
+        return $pdf->download('invoice.pdf');
+    }
+
+    public function annular($id)
+    {
+        try {
+            $invoiceReport = Invoicesreport::find($id);
+            $invoiceReport->state = 0;
+            $invoiceReport->save();
+            Session::flash('success_message', 'Se anuló la factura correctamente.');
+            return Redirect::to('invoices');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Session::flash('flash_message', 'No se pudo anular la factura, ocurrió un error');
+            return Redirect::to('invoices');
+        }
     }
 }

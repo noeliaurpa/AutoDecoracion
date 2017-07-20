@@ -6,7 +6,7 @@
 @section('content')
 @parent
 <div class="col-md-10 col-xs-10">
-	<h2 class="page-header">
+	<h2 class="page-header" style="color:#831608;">
 		Nueva Factura
 	</h2>
 	<!--form action=" {{ url('/invoices') }}" method="post">
@@ -89,9 +89,11 @@
 			</tr>
 		</tfoot>
 	</table>
-	<div>
-		<button onclick="saveData()" class="btn btn-primary form-control">Guardar</button>
+	<div class="form-group">
+		<button onclick="saveData()" class="btn btn-primary">Guardar</button>
+		<a class="btn btn-danger" href="{{ URL::to('invoices/') }}">Cancelar</a>
 	</div>
+
 	<!--/form-->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

@@ -17,21 +17,21 @@
 		@endif
 	</div>
 	<div class="input-group">
-        @if(Session::has('success_message'))
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Excelente!</strong> {{Session::get('success_message')}}.
-        </div>
-        @endif
-    </div>
-    <div class="input-group">
-        @if(Session::has('update_message'))
-        <div class="alert alert-info">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Excelente!</strong> {{Session::get('update_message')}}.
-        </div>
-        @endif
-    </div>
+		@if(Session::has('success_message'))
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡Excelente!</strong> {{Session::get('success_message')}}.
+		</div>
+		@endif
+	</div>
+	<div class="input-group">
+		@if(Session::has('update_message'))
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡Excelente!</strong> {{Session::get('update_message')}}.
+		</div>
+		@endif
+	</div>
 	<?php echo Form::open(['url' => 'vehicles', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
@@ -42,7 +42,7 @@
 	<div class="table-responsive">
 		@if(count($vehiclee)>0)
 		@if (Auth::user()->workstation == "Administrador")
-		<table  class="table table-hover">
+		<table class="table table-striped">
 			<tr class="backtabletr">
 				<th>Nombre del cliente</th>
 				<th>Placa</th>
@@ -115,7 +115,7 @@
 	<tr class="backtabletd"> 
 		{{-- Columna DATOS del Vehiculo --}}
 		<td>
-			{{ $car->client_id }}
+			{{ $car->client->name }}
 		</td>
 		<td>
 			{{ $car->license_plate_or_detail }}
@@ -131,7 +131,7 @@
 		</td>
 		{{-- Columna botón SHOW --}}
 		<td>
-			<a class="btn btn-default btn-sm"
+			<a class="btn btn-prin btn-sm"
 			href="{{ URL::to('vehicles/' . $car->id) . '/show' }}" role="button">
 			<span class="glyphicon glyphicon-eye-open"></span>
 		</a>
@@ -147,12 +147,12 @@
 
 @if (Auth::user()->workstation == "Administrador")
 <a href="{{ url('/vehicles/create') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Registrar nuevo vehículo
 </a>
 @endif
 <a href="{{ url('/home') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Inicio
 </a>
 

@@ -116,6 +116,10 @@ Route::get('invoices/create', 'InvoiceReportController@create')->middleware('aut
 
 Route::get('invoices/{id}/show', 'InvoiceReportController@show')->middleware('auth');
 
+Route::get('invoices/{id}/annular', 'InvoiceReportController@annular')->middleware('auth');
+
+Route::get('invoices/{id}/download', 'InvoiceReportController@download')->middleware('auth');
+
 //"invoices" for "post" to store a new record
 Route::post('invoices', 'InvoiceReportController@store')->middleware('auth');
 
@@ -157,12 +161,17 @@ Route::get('send', 'Sms@index')->middleware('auth');
 Route::post('send/create', 'Sms@send')->middleware('auth');
 
 //****************************************************************************************
+
+//
+Route::get('reports', 'ReportsController@index')->middleware('auth');
+
+//****************************************************************************************
 //this route is for when any route not exist return home 
 Route::get('/{nombre?}', function ($nombre = null) {
 	if (is_null($nombre)) {
-		return Redirect::to('/');
+		return Redirect::to('/home');
 	}
-    return Redirect::to('/');
+    return Redirect::to('/home');
 });
 
 

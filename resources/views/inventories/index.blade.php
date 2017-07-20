@@ -18,7 +18,7 @@
 	<div class="table-responsive">
 		@if(count($inventor)>0)
 		@if (Auth::user()->workstation == "Administrador")
-		<table  class="table table-hover">
+		<table class="table table-striped">
 			<tr class="backtabletr">
 				<th>Nombre del artículo</th>
 				<th>Cantidad</th>
@@ -59,15 +59,21 @@
 		@foreach ($inventor as $inventario)
 		<tr class="backtabletd"> 
 			{{-- Columna DATOS del Inventario --}}
-			<td>
-				{{ $inventario->article_id }}
+			@if($inventario->article->unit_or_quantity <= 0)
+			<td class="quantityN">
+				{{ $inventario->article->name }}
 			</td>
+			@else
+			<td>
+				{{ $inventario->article->name }}
+			</td>
+			@endif
 			<td>
 				{{ $inventario->article->unit_or_quantity }} unidades
 			</td>
 			{{-- Columna botón SHOW --}}
 			<td>
-				<a class="btn btn-default btn-sm"
+				<a class="btn btn-prin btn-sm"
 				href="{{ URL::to('inventory/' . $inventario->id) . '/show' }}" role="button">
 				<span class="glyphicon glyphicon-eye-open"></span>
 			</a>
@@ -85,7 +91,7 @@
 
 @endif
 <a href="{{ url('/home') }}"
-class="btn btn-primary btn-sm">
+class="btn btn-primary">
 Inicio
 </a>
 

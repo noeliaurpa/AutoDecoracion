@@ -13,131 +13,144 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/css.css') }}" rel="stylesheet">
-    {!! Html::style('vendor/seguce92/bootstrap/dist/css/bootstrap.min.css') !!}
-    {!! Html::style('vendor/seguce92/fullcalendar/fullcalendar.min.css') !!}
-    {!! Html::style('vendor/seguce92/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') !!}
-    {!! Html::style('vendor/seguce92/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') !!}
+    {!! Html::style('variety/styles/bootstrap/dist/css/bootstrap.min.css') !!}
+    {!! Html::style('variety/styles/fullcalendar/fullcalendar.min.css') !!}
+    {!! Html::style('variety/styles/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') !!}
+    {!! Html::style('variety/styles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') !!}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset('bower_components/EasyAutocomplete/dist/easy-autocomplete.min.css') }}" rel="stylesheet" type="text/css">
     <!--script src="{{ asset('bower_components/EasyAutocomplete/lib/jquery-1.11.2.min.js') }}"></script>
     <script src="{{ asset('bower_components/EasyAutocomplete/dist/jquery.easy-autocomplete.min.js') }}" type="text/javascript" ></script-->
-    {!! Html::style('awesomplete/awesomplete.css') !!}
-    {!! Html::style('awesomplete/prism/prism.css') !!}
-    <script src="{{ asset('awesomplete/awesomplete.js') }}"></script>
-    <script src="{{ asset('awesomplete/index.js') }}"></script>
-    <!-- Scripts -->
-    <script>
-    window.Laravel = {!! json_encode([
-        'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default home">
-          <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"><img class="logo" type="image" src="{{ asset('img/logo.jpg') }}"></a>
-            </div>
+        {!! Html::style('awesomplete/awesomplete.css') !!}
+        {!! Html::style('awesomplete/prism/prism.css') !!}
+        <script src="{{ asset('awesomplete/awesomplete.js') }}"></script>
+        <script src="{{ asset('awesomplete/index.js') }}"></script>
+        <!-- Scripts -->
+        <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            ]) !!};
+        </script>
+    </head>
+    <body>
+        <div id="app">
+            <nav class="navbar navbar-default home">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img class="logo" type="image" src="{{ asset('img/logo.jpg') }}"></a>
+                </div>
 
-            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="true">
+                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="true">
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right" style="margin: 7px;">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                    <div class="top-right links">
-                        <a class="btn btn-default linksHome" href="{{ route('login') }}">Iniciar Sesion</a>
-                    </div>
-                    @else 
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right" style="margin: 7px;">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                        <div class="top-right links">
+                            <a class="btn btn-default linksHome" href="{{ route('login') }}">Iniciar Sesion</a>
+                        </div>
+                        @else 
 
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle linka">
-                         {{ Auth::user()->name }} <span class="caret"></span>
-                     </a>
-                     @if (Auth::user()->workstation == "Administrador")
-                     <ul class="dropdown-menu" role="menu">
-                        <li class = "dropdown"> <a class="btn btn-primary linksHome" href="{{ route('register') }}">Registrar</a></li>
-                        <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('articles/')}}" role="button"> Articulos </a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "dropdown"> <a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            Cerrar Sesion
-                        </a>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle linka">
+                             {{ Auth::user()->name }} <span class="caret"></span>
+                         </a>
+                         @if (Auth::user()->workstation == "Administrador")
+                         <ul class="dropdown-menu" role="menu">
+                            <li class = "dropdown"> <a class="btn btn-primary linksHome" href="{{ route('register') }}">Registrar</a></li>
+                            <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('articles/')}}" role="button"> Articulos </a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
+                            <li class = "dropdown"> <a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                Cerrar Sesion
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                    @else
-                    <ul class="dropdown-menu" role="menu">
-                        <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "dropdown"><a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            Cerrar Sesion
-                        </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                        @else
+                        <ul class="dropdown-menu" role="menu">
+                            <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                            <li class = "dropdown"><a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                Cerrar Sesion
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                    @endif
+                </li>
                 @endif
-            </li>
-            @endif
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 </nav>
 </div>
 <div class="row ancho">
     <div class="container barra">
         <div class="col-md-2 col-xs-2 visible-md visible-lg hidden-xs hidden-md">
             <div class="panel panel-default panel_menu panelMenu">
-
-                <div class="panel-heading menu_principal menu_home">
-                    <ul>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 8% 8% 8%;" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 19% 8% 19%;" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 15%;" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 14%;" href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 18% 8% 18%;" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 13% 8% 13%;" href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 4% 8% 5%;" href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
-                    </ul>
-                </div>
+             @if (Auth::user()->workstation == "Administrador")
+             <div class="panel-heading menu_principal menu_home">
+                <ul>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 8% 8% 8%;" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 19% 8% 19%;" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 15%;" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 14%;" href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 18% 8% 18%;" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 13% 8% 13%;" href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 4% 8% 5%;" href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
+                </ul>
             </div>
+            @else
+            <div class="panel-heading menu_principal menu_home">
+                <ul>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 8% 8% 8%;" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 17% 8% 17%;" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 19% 8% 19%;" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 15%;" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 15% 8% 14%;" href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 18% 8% 18%;" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 13% 8% 13%;" href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
+                    <li class = "lipadding"> <a class="menuPrincipal" style="padding: 8% 4% 8% 5%;" href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
+                </ul>
+            </div>
+            @endif
         </div>
-        <!-- Sección de contenido principal -->
-        @yield('content')
     </div>
+    <!-- Sección de contenido principal -->
+    @yield('content')
+</div>
 </div>
 
 @section('footer')

@@ -6,14 +6,14 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-dompdf": "^0.8.0",
         "edofre/laravel-fullcalendar": "V1.0.10",
         "edofre/laravel-fullcalendar-scheduler": "^1.0",
         "google/apiclient": "2.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "textmagic/smsphp": "dev-master",
-        "setasign/fpdi-tcpdf": "1.*"
+        "textmagic/smsphp": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

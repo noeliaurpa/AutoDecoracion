@@ -39,6 +39,12 @@
 				<button type="submit" class="btn btn-primary form-control">Enviar mensaje</button>
 			</div>
 		</div>
+		<hr>
+		<div class="row">
+			<div class="col-xs-12">
+				<a class="btn btn-danger" href="{{ URL::to('message/') }}">Cancelar</a>
+			</div>
+		</div>
 	</form>
 	@include('errors.list')
 </div>
