@@ -74,17 +74,9 @@
 		</h2>
 		<div>
 			<div>
-				<label>Datos del Cliente:</label>
+				<label>Datos del Proveedor:</label>
 				<div>
 					<label/>Nombre: {{$invoicereport->nameClient}}</label>
-				</div>
-			</div>
-			<div>
-				<label>Datos del vehículo:</label>
-				<div>
-					<label /> Marca: {{$invoicereport->brand}}</label>
-					<label class="espacio"/> Modelo: {{$invoicereport->model}}</label>
-					<label class="espacio"/> Placa: {{$invoicereport->license_plate_or_detail}}</label>
 				</div>
 			</div>
 			<div>

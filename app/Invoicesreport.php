@@ -12,9 +12,14 @@ class Invoicesreport extends Model
      * @var array
      */
     protected $fillable = [
-        'vehicle_id', 'number', 'client_id','total', 'subtotal', 'iv', 'observation'
+    'license_plate_or_detail','brand','model', 'number', 'nameClient','total', 'subtotal', 'iv', 'observation', 'state','Client_or_Provider'
     ];
 
+    public function scopeSearch($query, $nameClient)
+    {
+        return $query->where('nameClient', 'LIKE', "%$nameClient%");
+    }
+    
     public function client()
     {
     	return $this->belongsTo('App\Customer');

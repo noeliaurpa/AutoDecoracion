@@ -172,13 +172,15 @@ $('.colorpicker').colorpicker();
 $('#time_start').bootstrapMaterialDatePicker({ 
     date: false,
     shortTime: false,
-    format: 'HH:mm:ss'
+    format: 'HH:mm:ss',
+    lang : 'es'
 });
 
 $('#date_end').bootstrapMaterialDatePicker({ 
     date: true,
     shortTime: false,
-    format: 'YYYY-MM-DD HH:mm:ss'
+    format: 'YYYY-MM-DD HH:mm:ss',
+    lang : 'es'
 });
 
 $('#delete').on('click', function(){

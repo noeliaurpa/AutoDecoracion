@@ -132,10 +132,10 @@ class VehiclesController extends Controller
             // delete
             $vehicles = Vehicle::find($id);
             $vehicles->delete();
-            Session::flash('flash_message', 'Se eliminó correctamente.');
+            Session::flash('success_message', 'Se eliminó correctamente.');
             return Redirect::to('vehicles');
         } catch (\Illuminate\Database\QueryException $e) {
-            Session::flash('flash_message', 'Hubo un error a la hora de eliminar el vehículo');
+            Session::flash('flash_message', 'Hubo un error a la hora de eliminar el vehículo porque pertenece a una factura');
             return Redirect::to('vehicles');
         }
     }

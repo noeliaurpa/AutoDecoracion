@@ -12,13 +12,13 @@ class Inventorie extends Model
      * @var array
      */
    protected $fillable = [
-   'article_id','observation' => 'null', 
+   'article_id','nameArticle', 'observation', 
    ];
 
 
-   public function scopeSearch($query, $article_id)
+   public function scopeSearch($query, $nameArticle)
    {
-   	return $query->where('article_id', 'LIKE', "%$article_id%");
+   	return $query->where('nameArticle', 'LIKE', "%$nameArticle%");
    }
 
    public function article()

@@ -12,7 +12,7 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'provider_id', 'name', 'tell','observation', 
+        'name', 'tell','observation', 
     ];
 
 
@@ -24,10 +24,5 @@ class Customer extends Model
     public function scopeName($query, $q)
     {
        return $query->where('name', 'LIKE', '%$q%');
-    }
-
-    public function provider()
-    {
-        return $this->belongsTo('App\Provider');
     }
 }

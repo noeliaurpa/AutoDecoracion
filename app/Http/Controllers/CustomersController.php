@@ -33,7 +33,6 @@ class CustomersController extends Controller
     public function create()
     {
         $customers['cliennt'] = Customer::all();
-        $customers['proveer'] = Provider::all();
         return View::make('customers.create')
         ->with($customers);
     }
@@ -66,14 +65,8 @@ class CustomersController extends Controller
     {
         // Recupera el registro de base de datos
         $customers = Customer::find($id);
-        if ($customers->provider_id == null) {
-            return View::make('customers.show')
-            ->with('cliennt', $customers);
-        }else{
-            $customers['proveer'] = Provider::find($customers->provider_id);
-            return View::make('customers.show')
-            ->with('cliennt', $customers);
-        }
+        return View::make('customers.show')
+        ->with('cliennt', $customers);
     }
 
     /**
@@ -86,7 +79,6 @@ class CustomersController extends Controller
     {
         // Recupera el registro de base de datos
         $customers['cliennt'] = Customer::find($id);
-        $customers['proveer'] = Provider::all();
         return View::make('customers.edit')
         ->with($customers);
     }
@@ -102,7 +94,6 @@ class CustomersController extends Controller
     {
         try {
             $customers = Customer::find($id);
-            $customers->provider_id = $request->get('provider_id');
             $customers->name = $request->get('name');
             $customers->tell = $request->get('tell');
             $customers->observation = $request->get('observation');
@@ -127,10 +118,10 @@ class CustomersController extends Controller
             // delete
             $customers = Customer::find($id);
             $customers->delete();
-            Session::flash('flash_message', 'Se eliminó correctamente.');
+            Session::flash('success_message', 'Se eliminó correctamente.');
             return Redirect::to('customers');
         } catch (\Illuminate\Database\QueryException $e) {
-            Session::flash('flash_message', 'No se pudo eliminar el cliente');
+            Session::flash('flash_message', 'No se pudo eliminar el cliente porque es dueño de un vehículo');
             return Redirect::to('customers');
         }
     }

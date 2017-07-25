@@ -11,17 +11,6 @@
   <p>El cliente solicitado no existe</p>
   @else
   <h1 style="text-align: center;">{{ $cliennt->name }}</h1>
-  @if($cliennt->provider_id == null)
-  <div class="form-group">
-    <label>Nombre del proveedor: </label>
-    <input readonly="true" type="text" class="form-control" value="">
-  </div>
-  @else
-  <div class="form-group">
-    <label>Nombre del proveedor: </label>
-    <input readonly="true" type="text" class="form-control" value="{{ $cliennt->proveer->name }}">
-  </div>
-  @endif
   <div class="form-group">
     <label>Nombre: </label>
     <input readonly="true" type="text" class="form-control" value="{{ $cliennt->name }}">

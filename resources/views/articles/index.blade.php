@@ -79,14 +79,14 @@
 				@endif
 				{{-- Columna botón SHOW --}}
 				<td>
-					<a class="btn btn-default btn-sm"
+					<a class="btn btn-prin btn-sm"
 					href="{{ URL::to('articles/' . $artic->id) . '/show' }}" role="button">
 					<span class="glyphicon glyphicon-eye-open"></span>
 				</a>
 			</td>
 			{{-- Columna botón EDIT --}}
 			<td>
-				<a class="btn btn-default btn-sm"
+				<a class="btn btn-warning btn-sm"
 				href="{{ URL::to('articles/' . $artic->id . '/edit') }}" role="button">
 				<span class="glyphicon glyphicon-pencil"></span>
 			</a>
@@ -99,7 +99,7 @@
 			method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="hidden" name="_method" value="DELETE">
-			<button type="submit" class="btn btn-default btn-sm">
+			<button type="submit" class="btn btn-danger btn-sm">
 				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</form>

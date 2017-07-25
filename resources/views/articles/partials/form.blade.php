@@ -2,7 +2,7 @@
 <div class="form-group">
   <label for="name">Nombre:</label>
   <input  maxlength="191" 
-  type="text" name="name" class="form-control" pattern="[A-Za-z]{3,191}" title="Solo puede utilizar letras"
+  type="text" name="name" class="form-control" title="Solo puede utilizar letras"
   value="{{ isset($articlee->name) ? $articlee->name : '' }}" required>
 </div>
 <div class="form-group">

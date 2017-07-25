@@ -44,7 +44,6 @@
 		@if (Auth::user()->workstation == "Administrador")
 		<table class="table table-striped">
 			<tr class="backtabletr">
-				<th>Nombre del proveedor</th>
 				<th>Nombre del cliente</th>
 				<th>Teléfono</th>
 				<th>Ver</th>
@@ -54,15 +53,6 @@
 			@foreach ($cliennt as $client)
 			<tr class="backtabletd"> 
 				{{-- Columna NOMBRE del cliente --}}
-				@if($client->provider_id == null)
-				<td>
-					
-				</td>
-				@else
-				<td>
-					{{$client->provider->name}}
-				</td>
-				@endif
 				<td>
 					{{ $client->name }}
 				</td>
@@ -71,14 +61,14 @@
 				</td>
 				{{-- Columna botón SHOW --}}
 				<td>
-					<a class="btn btn-default btn-sm"
+					<a class="btn btn-prin btn-sm"
 					href="{{ URL::to('customers/' . $client->id) . '/show' }}" role="button">
 					<span class="glyphicon glyphicon-eye-open"></span>
 				</a>
 			</td>
 			{{-- Columna botón EDIT --}}
 			<td>
-				<a class="btn btn-default btn-sm"
+				<a class="btn btn-warning btn-sm"
 				href="{{ URL::to('customers/' . $client->id . '/edit') }}" role="button">
 				<span class="glyphicon glyphicon-pencil"></span>
 			</a>
@@ -91,7 +81,7 @@
 			method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="hidden" name="_method" value="DELETE">
-			<button type="submit" class="btn btn-default btn-sm">
+			<button type="submit" class="btn btn-danger btn-sm">
 				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</form>
@@ -102,7 +92,6 @@
 @else
 <table  class="table table-hover">
 	<tr class="backtabletr">
-		<th>Nombre del proveedor</th>
 		<th>Nombre del cliente</th>
 		<th>Teléfono</th>
 		<th>Ver</th>
@@ -110,15 +99,6 @@
 	@foreach ($cliennt as $client)
 	<tr class="backtabletd"> 
 		{{-- Columna NOMBRE del cliente --}}
-		@if($client->provider_id == null)
-		<td>
-			
-		</td>
-		@else
-		<td>
-			{{$client->provider->name}}
-		</td>
-		@endif
 		<td>
 			{{ $client->name }}
 		</td>

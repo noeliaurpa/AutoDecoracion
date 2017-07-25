@@ -123,6 +123,15 @@ Route::get('invoices/{id}/download', 'InvoiceReportController@download')->middle
 //"invoices" for "post" to store a new record
 Route::post('invoices', 'InvoiceReportController@store')->middleware('auth');
 
+Route::get('invoices/createReportPurchase', 'InvoiceReportController@createReportPurchase')->middleware('auth');
+
+Route::post('invoicesReportPurchase', 'InvoiceReportController@storeReportPurchase')->middleware('auth');
+
+Route::get('invoices/{id}/showReportPurchase', 'InvoiceReportController@showReportPurchase')->middleware('auth');
+
+Route::get('invoices/{id}/annularReportPurchase', 'InvoiceReportController@annularReportPurchase')->middleware('auth');
+
+Route::get('invoices/{id}/downloadReportPurchase', 'InvoiceReportController@downloadReportPurchase')->middleware('auth');
 //***************************************************************************************
 
 
@@ -164,6 +173,7 @@ Route::post('send/create', 'Sms@send')->middleware('auth');
 
 //
 Route::get('reports', 'ReportsController@index')->middleware('auth');
+Route::post('reports', 'ReportsController@create')->middleware('auth');
 
 //****************************************************************************************
 //this route is for when any route not exist return home 

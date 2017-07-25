@@ -18,18 +18,6 @@
 				<input id="numInvoice" name="numInvoice" class="form-control" type="text" placeholder="numero de factura" value="{{$invoicereport->number}}" readonly>
 			</div>
 		</div>
-		<hr>
-		<div class="row">
-			<div class="col-xs-4">
-				<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo" value="{{$invoicereport->brand}}" readonly/>
-			</div>
-			<div class="col-xs-4">
-				<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo" value="{{$invoicereport->model}}"readonly/>
-			</div>
-			<div class="col-xs-4">
-				<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" value="{{$invoicereport->license_plate_or_detail}}" readonly/>
-			</div>
-		</div>
 	</div>
 	<hr/>
 

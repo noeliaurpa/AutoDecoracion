@@ -1,7 +1,7 @@
 <!-- Form Input -->
 <div class="form-group">
   <label for="message">Escriba un mensaje:</label>
-  <input  maxlength="191"
+  <input  maxlength="70"
   type="text" name="message" class="form-control"
   value="{{ isset($messaje->message) ? $messaje->message : '' }}" required>
 </div>

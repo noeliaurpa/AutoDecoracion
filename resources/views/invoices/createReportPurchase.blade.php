@@ -14,32 +14,20 @@
 	<div class="well well-sm">
 		<div class="row">
 			<div class="col-xs-10">
-				<input id="nameClient" name="nameClient" class="form-control" type="text" placeholder="Nombre del cliente"/>
+				<input id="nameProvider" class="form-control awesomplete" type="text" placeholder="Nombre del Proveedor" data-list="#myprovider" data-multiple/>
+				<ul id="myprovider" hidden>
+					@foreach($provider as $key)
+					<li id="providers" name="{{ $key->id }}" value="{{ $key->name }}">{{$key->name}}</li>
+					@endforeach
+				</ul>
 			</div>
 			<div class="col-xs-2">
 				<input id="numInvoice" value="{{$numInvoice+1}}" name="numInvoice" class="form-control" type="text" placeholder="numero de factura" readonly>
 			</div>
 		</div>
-		<hr>
-		<div class="row">
-			<div class="col-xs-4">
-				<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo"/>
-			</div>
-			<div class="col-xs-4">
-				<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo"/>
-			</div>
-			<div class="col-xs-4">
-				<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" data-multiple />
-				<ul id="mylicense" hidden >
-					@foreach($vehicle as $key)
-					<li id="plate" name="{{ $key->id }}" value="{{ $key->license_plate_or_detail }}">{{$key->license_plate_or_detail}}</li>
-					@endforeach 
-				</ul>
-			</div>
-		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-7">
+		<div class="col-xs-5">
 			<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo" data-list="#myarticle" data-multiple>
 			<ul id="myarticle" hidden>
 				@foreach($article as $key)
@@ -48,10 +36,13 @@
 			</ul>
 		</div>
 		<div class="col-xs-2">
-			<input id="quantity" class="form-control" type="number" placeholder="cantidad">
+			<input id="quantity" class="form-control" type="number" placeholder="Cantidad existente">
 		</div>
 		<div class="col-xs-2">
-			<input id="price" class="form-control" type="number" placeholder="Precio">	
+			<input id="newQuantity" class="form-control" type="number" placeholder="Cantidad entrante">	
+		</div>
+		<div class="col-xs-2">
+			<input id="price" class="form-control" type="number" placeholder="Precio Unitario">	
 		</div>
 		<div class="col-xs-1">
 			<a onclick="add(this)" class="btn btn-primary form-control" id="btn-agregar">
@@ -67,8 +58,8 @@
 			<tr>
 				<th style="width:40px"></th>
 				<th>Artículo</th>
-				<th style="width:100px">Cantidad</th>
-				<th style="width:100px">Precio</th>
+				<th style="width:100px">cantidad</th>
+				<th style="width:165px">Precio unitario</th>
 				<th style="width:105px">Total</th>
 			</tr>
 		</thead>
@@ -98,35 +89,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-//esto quiere decir que si se selecciona una opcion del input que tiene el id license
-document.getElementById('license').addEventListener('awesomplete-selectcomplete',function(){
-	//coloco en una variable todos los vehículos y los clientes que vienen del controlador
-	var vehicle = "{{$vehicle}}";
-	var client = "{{$client}}";
-	//les quité a las variables de arriba las comillas que traia
-	var vehi = vehicle.split("&quot;");
-	var cli = client.split("&quot;");
-	// hice un for para recorrer los vehículos
-	for (var i = 0; i <= vehi.length; i++) {
-		//si donde está seleccionado es igual al texto del input con el id license
-		if(vehi[i] == document.getElementById("license").value){
-			//coloque la marca y el modelo
-			document.getElementById("brand").value = vehi[i+4];
-			document.getElementById("model").value = vehi[i+8];
-			//realicé otro for para recorrer los clientes
-			for (var y = 0; y <= cli.length; y++) {
-				//si donde está seleccionado es igual a el id del clientes que tiene el vehículo seleccionado
-				if(cli[y] == vehi[i-3]){
-					//se coloca el nombre del cliente en el input que tiene el ip nameClien
-					document.getElementById("nameClient").value = cli[y+3];
-					//document.getElementById("numInvoice").value = "000"+cli[y].split(":")[1].split(",")[0];
-				}else{
-				}
-			};
-		}else{
-		}
-	};
-});
 
 //si se selecciona una opcion del input que tiene el id articlee
 document.getElementById('articlee').addEventListener('awesomplete-selectcomplete',function(){
@@ -138,8 +100,9 @@ document.getElementById('articlee').addEventListener('awesomplete-selectcomplete
 	for (var i = 0; i <= artic.length; i++) {
 		//si donde está seleccionado es igual al nombre del articulo seleccionado
 		if(artic[i] == document.getElementById("articlee").value){
-			//se le coloca el precio del articulo en el campo que tiene el id price
-			document.getElementById("price").value = artic[i+7].split(":")[1].split(",")[0];
+			//se le coloca el precio del articulo en el campo que tiene el id quantity
+			document.getElementById("quantity").value = artic[i+11].split(":")[1].split(",")[0];
+			document.getElementById("price").value = artic[i+9].split(":")[1].split(",")[0];
 		}else{
 
 		}
@@ -190,7 +153,7 @@ var numero = 1;
 function addToCartTable(cells) {
 	var To = 0;
 	var article = document.getElementById("articlee").value;
-	var quanti = document.getElementById("quantity").value;
+	var quanti = document.getElementById("newQuantity").value;
 	var price = document.getElementById("price").value;
 	if(article == "" || quanti == "" || price == ""){
 		alert("Debe agregar los campos del nombre del articulo, la cantidad y el precio para poder agregarlo a la factura.");
@@ -229,6 +192,9 @@ function addToCartTable(cells) {
 			document.getElementById("subtotal").innerHTML = subT.toFixed(2);
 			document.getElementById("total").innerHTML = tot.toFixed(2);
 			document.getElementById("quantity").value = "";
+			document.getElementById("newQuantity").value = "";
+			document.getElementById("price").value = "";
+			document.getElementById("articlee").value = "";
 		}	
 	}
 }
@@ -254,18 +220,13 @@ function saveData(){
 		arreglo.push(miCelda3);
 		arreglo.push(miCelda4);
 	};
-	if(document.getElementById('nameClient').value == ""){
-		alert("Se requiere el nombre del cliente");
-	}else if(document.getElementById('license').value == ""){
-		alert("Se requiere el numero de placa");
+	if(document.getElementById('nameProvider').value == ""){
+		alert("Se requiere el nombre del proveedor");
 	}else if(arreglo.length == 0){
 		alert("No se puede completar la factura sin articulos");
 	}else{
-		$.post(BASEURL + '/invoices', {
-			nameC: document.getElementById("nameClient").value,
-			brand: document.getElementById("brand").value,
-			model: document.getElementById("model").value,
-			license: document.getElementById("license").value,
+		$.post(BASEURL + '/invoicesReportPurchase', {
+			nameP: document.getElementById("nameProvider").value,
 			numInvoice: document.getElementById("numInvoice").value,
 			iv: document.getElementById("impuestoDVenta").innerHTML,
 			sbt: document.getElementById("subtotal").innerHTML,
@@ -294,11 +255,6 @@ function createCell(text) {
 	return td;
 }
 
-function calcular (argument) {
-	for (var i = 0; i < Things.length; i++) {
-		Things[i]
-	};
-}
 </script>
 
 @stop

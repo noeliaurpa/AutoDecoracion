@@ -6,7 +6,7 @@
 @section('content')
 @parent
 <div class="col-md-10">
-	<h1>Editando: {!! $messaje->message  !!}</h1>
+	<h1>Editando mensaje</h1>
 	<hr>
 	<form method="POST"	action="{{ url('/message', $messaje->id) }}" accept-charset="UTF-8">
 		<input type="hidden" name="_method" value="PATCH">

@@ -33,7 +33,7 @@
           @if (Route::has('register'))
           <div class="top-right links">
             @if (Auth::check())
-            <a class="btn btn-primary linksHome" href="{{ url('/home') }}">Home</a>
+            <a class="btn btn-primary linksHome" href="{{ url('/home') }}">Ir a nicio</a>
             @else
             <a class="btn btn-primery linksHome" href="{{ url('/login') }}">Iniciar Sesion</a>
             @endif

@@ -54,15 +54,18 @@ class ArticlesController extends Controller
         try {
             $id = Article::create($request->all());
             $idd = $id->id;
+            $nameArticle = $id->name;
             if($request->get('radSize') == 'inventario')
             {
                 $Inventorie = new Inventorie;
                 $Inventorie->article_id = $idd;
+                $Inventorie->nameArticle = $nameArticle;
                 $Inventorie->observation = null;
                 $Inventorie->save();
             }else{
                 $Smallboxe = new Smallboxe;
                 $Smallboxe->article_id = $idd;
+                $Smallboxe->nameArticle = $nameArticle;
                 $Smallboxe->observation = null;
                 $Smallboxe->save();
             }
@@ -154,7 +157,7 @@ class ArticlesController extends Controller
                 $cajachica->delete();
                 $articles->delete();
             }
-            Session::flash('flash_message', 'Se eliminó correctamente.');
+            Session::flash('success_message', 'Se eliminó correctamente.');
             return Redirect::to('articles');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Eliminaste un articulo por lo tanto se eliminó de la caja chica o del inventario');

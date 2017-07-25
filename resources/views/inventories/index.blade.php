@@ -20,6 +20,7 @@
 		@if (Auth::user()->workstation == "Administrador")
 		<table class="table table-striped">
 			<tr class="backtabletr">
+				<th>Código del artículo</th>
 				<th>Nombre del artículo</th>
 				<th>Cantidad</th>
 				<th>ver</th>
@@ -27,6 +28,9 @@
 			@foreach ($inventor as $inventario)
 			<tr class="backtabletd"> 
 				{{-- Columna DATOS del inventario --}}
+				<td>
+					{{$inventario->article->code}}
+				</td>
 				@if($inventario->article->unit_or_quantity <= 0)
 				<td class="quantityN">
 					{{ $inventario->article->name }}
@@ -37,11 +41,11 @@
 				</td>
 				@endif
 				<td>
-					{{ $inventario->article->unit_or_quantity }} unidades
+					{{ $inventario->article->unit_or_quantity }}
 				</td>
 				{{-- Columna botón SHOW --}}
 				<td>
-					<a class="btn btn-default btn-sm"
+					<a class="btn btn-prin btn-sm"
 					href="{{ URL::to('inventory/' . $inventario->id) . '/show' }}" role="button">
 					<span class="glyphicon glyphicon-eye-open"></span>
 				</a>
@@ -52,6 +56,7 @@
 	@else
 	<table  class="table table-hover">
 		<tr class="backtabletr">
+			<th>Código del artículo</th>
 			<th>Nombre del artículo</th>
 			<th>Cantidad</th>
 			<th>ver</th>
@@ -59,6 +64,9 @@
 		@foreach ($inventor as $inventario)
 		<tr class="backtabletd"> 
 			{{-- Columna DATOS del Inventario --}}
+			<td>
+				{{$inventario->article->code}}
+			</td>
 			@if($inventario->article->unit_or_quantity <= 0)
 			<td class="quantityN">
 				{{ $inventario->article->name }}
@@ -69,7 +77,7 @@
 			</td>
 			@endif
 			<td>
-				{{ $inventario->article->unit_or_quantity }} unidades
+				{{ $inventario->article->unit_or_quantity }}
 			</td>
 			{{-- Columna botón SHOW --}}
 			<td>

@@ -12,7 +12,7 @@ class Invoicesarticle extends Model
      * @var array
      */
     protected $fillable = [
-        'invoice_id', 'article_id', 'quantity','price', 'total'
+        'invoice_id', 'codeArticle','nameArticle', 'quantity','price', 'total'
     ];
 
     public function article()

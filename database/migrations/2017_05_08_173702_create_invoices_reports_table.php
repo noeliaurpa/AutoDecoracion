@@ -15,16 +15,18 @@ class CreateInvoicesReportsTable extends Migration
     {
         Schema::create('invoicesReports', function (Blueprint $table) {
             $table->increments('id'); //id
-            $table-> integer('vehicle_id')->unsigned(); //id del vehiculo
+            $table->string('license_plate_or_detail')->nullable(); //placa del vehiculo
+            $table->string('brand')->nullable(); //marca del vehiculo
+            $table->string('model')->nullable(); //modelo del vehiculo
             $table->string('number'); //numero de fatura
-            $table-> integer('client_id')->unsigned(); //nombre del cliente
+            $table->string('nameClient'); //nombre del cliente
             $table->float('total', 9, 2); //total de la factura
             $table->float('subtotal', 9, 2); //subtotal de la factura
             $table->float('iv'); // impuesto de venta de la factura
+            $table->integer('state');//estado de la factura, activo/inactivo, activo 1, inactivo 0
+            $table->integer('Client_or_Provider');//si es cliente o proveedor, cliente 2, proveedor 1
             $table->string('observation')->nullable(); //observacion
             $table->timestamps();
-            $table->foreign('vehicle_id')->references('id')->on('vehicles');
-            $table->foreign('client_id')->references('id')->on('customers');
         });
     }
 

@@ -1,13 +1,4 @@
 <!-- Form Input -->
-<div>
-  <label for="nameProvider">Nombre del proveedor:</label>
-  <select id="provider_id" class="form-control" name="provider_id" autofocus>
-  <option></option>  
-  @foreach($proveer as $key)
-    <option value="{{ $key->id }}">{{$key->name}}</option>
-  @endforeach  
-  </select>
-</div>
 <div class="form-group">
   <label for="name">Nombre:</label>
   <input maxlength="191"

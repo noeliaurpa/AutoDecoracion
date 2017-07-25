@@ -16,6 +16,7 @@ class CreateBoxSmallTable extends Migration
         Schema::create('smallBoxes', function (Blueprint $table) {
             $table->increments('id'); //id
             $table-> integer('article_id')->unsigned(); //id del cliente
+            $table->string('nameArticle');//nombre del articulo
             $table->string('observation')->nullable(); //observacion
             $table->timestamps();
             $table->foreign('article_id')->references('id')->on('articles');
