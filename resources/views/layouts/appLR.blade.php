@@ -64,15 +64,6 @@
                          @if (Auth::user()->workstation == "Administrador")
                          <ul class="dropdown-menu" role="menu">
                             <li class = "dropdown"> <a class="btn btn-primary linksHome" href="{{ route('register') }}">Registrar</a></li>
-                            <li class = "dropdown"> <a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('articles/')}}" role="button"> Articulos </a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
-                            <li class = "dropdown"> <a href="{{ URL::to('reports/')}}" role="button">Reportes</a> </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -86,14 +77,6 @@
                         </li>
                         @else
                         <ul class="dropdown-menu" role="menu">
-                            <li class = "dropdown"><a href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('inventory/')}}" role="button">Inventario</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('smallbox/')}}" role="button">Caja Chica</a> </li>
-                            <li class = "dropdown"><a href="{{ URL::to('message/')}}" role="button">Notificaciones</a> </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

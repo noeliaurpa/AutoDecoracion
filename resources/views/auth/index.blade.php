@@ -10,11 +10,20 @@
 	<h1 style="text-align:center;">Listado de usuarios</h1>
 	<div class="input-group">
 		@if(Session::has('flash_message'))
-		<div class="mensaje">
-			{{Session::get('flash_message')}}
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡ATENCIÓN!</strong> {{Session::get('flash_message')}}.
 		</div>
 		@endif
 	</div>
+    <div class="input-group">
+        @if(Session::has('update_message'))
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('update_message')}}.
+        </div>
+        @endif
+    </div>
 	<?php echo Form::open(['url' => 'users', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
@@ -59,7 +68,7 @@
 				</td>
 				{{-- Columna botón EDIT --}}
 				<td>
-					<a class="btn btn-default btn-sm"
+					<a class="btn btn-warning btn-sm"
 					href="{{ URL::to('users/' . $user->id . '/edit') }}" role="button">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</a>
@@ -67,47 +76,14 @@
 			{{-- Columna botón DELETE --}}
 			<td>
 				<!-- Utilizar el método DESTROY /users/{id} -->
-				<form action="{{ url('/users', $user->id) }}" method="post">
+				<form onsubmit="return confirmation()"
+				action="{{ url('/users', $user->id) }}" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="_method" value="DELETE">
-					<button type="submit" class="btn btn-default btn-sm">
+					<button type="submit" class="btn btn-danger btn-sm">
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 				</form>
-			</td>
-		</tr>
-		@endforeach
-	</table>
-	@else
-	<table  class="table table-hover">
-		<tr class="backtabletr">
-			<th>Nombre</th>
-			<th>Correo Electrónico</th>
-			<th>Teléfono</th>
-			<th>Ocupación</th>
-			<th>Salario</th>
-			<th>Observación</th>
-		</tr>
-		@foreach ($users as $user)
-		<tr class="backtabletd"> 
-			{{-- Columna NOMBRE del usuario --}}
-			<td>
-				{{ $user->name }}
-			</td>
-			<td>
-				{{ $user->email }}
-			</td>
-			<td>
-				{{ $user->tell }}
-			</td>
-			<td>
-				{{ $user->workstation }}
-			</td>
-			<td>
-				₡{{ $user->salary }}
-			</td>
-			<td>
-				{{ $user->observation }}
 			</td>
 		</tr>
 		@endforeach
@@ -122,6 +98,15 @@
 class="btn btn-primary btn-sm">
 Inicio
 </a>
-
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea aliminar el proveedor?"))
+    if(confirm("ESTA SEGURO QUE DESEA ELIMINAR EL USUARIO O ADMINISTRADOR?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop

@@ -44,10 +44,10 @@ class Sms extends Controller
 
             $api->send($text, $phones, $is_unicode);
             Session::flash('success_message','Se envió el mensaje correctamente.');
-            return Redirect::to('/home');
+            return Redirect::to('/message');
         } catch (\Exception $e) {
             Session::flash('flash_message','No se puede enviar mensajes porque no tienes saldo suficiente. '.$e);
-            return Redirect::to('/home');
+            return Redirect::to('/message');
         }
     }
 }

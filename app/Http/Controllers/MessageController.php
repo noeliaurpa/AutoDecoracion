@@ -50,6 +50,7 @@ class MessageController extends Controller
     {
         try {
             Notification::create($request->all());
+            Session::flash('success_message', 'Se ha creado correctamente.');
             return redirect('message');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de crear el mensaje');
@@ -86,6 +87,7 @@ class MessageController extends Controller
             $message = Notification::find($id);
             $message->message = $request->get('message');
             $message->save();
+            Session::flash('update_message', 'Se actualizó correctamente.');
             return Redirect::to('message');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de actualizar el mensaje');
@@ -105,6 +107,7 @@ class MessageController extends Controller
             // delete
             $message = Notification::find($id);
             $message->delete();
+            Session::flash('flash_message', 'Se eliminó correctamente.');
             return Redirect::to('message');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de eliminar el mensaje');

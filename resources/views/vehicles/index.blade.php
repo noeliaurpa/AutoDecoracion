@@ -88,7 +88,7 @@
 		{{-- Columna botón DELETE --}}
 		<td>
 			<!-- Utilizar el método DESTROY /vehicles/{id} -->
-			<form
+			<form onsubmit="return confirmation()"
 			action="{{ url('/vehicles', $car->id) }}"
 			method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -157,4 +157,14 @@ Inicio
 </a>
 
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea aliminar el vehículo?"))
+    if(confirm("ESTA SEGURO QUE DESEA ELIMINAR EL VEHÍCULO?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop

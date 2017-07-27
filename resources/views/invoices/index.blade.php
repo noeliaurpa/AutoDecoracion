@@ -124,7 +124,7 @@
 						@endif
 						<th class="text-right">{{$invoice->created_at}}</th>
 						@if($invoice->state == 1)
-						<td class="text-right" id= "{{$invoice->id}}"><a class="btn btn-danger" href="{{ URL::to('invoices/' . $invoice->id) . '/annularReportPurchase' }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td class="text-right" id= "{{$invoice->id}}"><a onsubmit="return confirmation()" class="btn btn-danger" href="{{ URL::to('invoices/' . $invoice->id) . '/annularReportPurchase' }}"><span class="glyphicon glyphicon-remove"></span></a></td>
 						@else
 
 						@endif
@@ -138,4 +138,14 @@
 	</div>
 	<hr>
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea aliminar el proveedor?"))
+    if(confirm("ESTA SEGURO QUE DESEA ANULAR LA FACTURA?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop

@@ -94,7 +94,7 @@
 		{{-- Columna botón DELETE --}}
 		<td>
 			<!-- Utilizar el método DESTROY /articles/{id} -->
-			<form
+			<form onsubmit="return confirmation()"
 			action="{{ url('/articles', $artic->id) }}"
 			method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -161,6 +161,15 @@ Registrar nuevo artículo
 class="btn btn-primary">
 Inicio
 </a>
-
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea aliminar el articulo?"))
+    if(confirm("ESTA SEGURO QUE DESEA ELIMINAR EL ARTÍCULO?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop

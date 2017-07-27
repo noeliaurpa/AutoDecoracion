@@ -76,7 +76,7 @@
 		{{-- Columna botón DELETE --}}
 		<td>
 			<!-- Utilizar el método DESTROY /customers/{id} -->
-			<form
+			<form onsubmit="return confirmation()"
 			action="{{ url('/customers', $client->id) }}"
 			method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -133,4 +133,14 @@ Inicio
 </a>
 
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea aliminar el cliente?"))
+    if(confirm("ESTA SEGURO QUE DESEA ELIMINAR EL CLIENTE?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop

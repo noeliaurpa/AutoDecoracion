@@ -24,6 +24,14 @@
         </div>
         @endif
     </div>
+    <div class="input-group">
+        @if(Session::has('update_message'))
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Excelente!</strong> {{Session::get('update_message')}}.
+        </div>
+        @endif
+    </div>
 	<?php echo Form::open(['url' => 'message', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
@@ -48,7 +56,7 @@
 				</td>
 				{{-- Columna botón EDIT --}}
 				<td>
-					<a class="btn btn-default btn-sm"
+					<a class="btn btn-warning btn-sm"
 					href="{{ URL::to('message/' . $notification->id . '/edit') }}" role="button">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</a>
@@ -56,12 +64,12 @@
 			{{-- Columna botón DELETE --}}
 			<td>
 				<!-- Utilizar el método DESTROY /message/{id} -->
-				<form
+				<form onsubmit="return confirmation()"
 				action="{{ url('/message', $notification->id) }}"
 				method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="_method" value="DELETE">
-				<button type="submit" class="btn btn-default btn-sm">
+				<button type="submit" class="btn btn-danger btn-sm">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 			</form>
@@ -105,4 +113,14 @@ Inicio
 </a>
 
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea eliminar la notificación?"))
+    if(confirm("ESTA SEGURO QUE DESEA ELIMINAR LA NOTIFICACIÓN?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop

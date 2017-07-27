@@ -84,11 +84,11 @@
 		{{-- Columna botón DELETE --}}
 		<td>
 			<!-- Utilizar el método DESTROY /Providers/{id} -->
-			<form
+			<form onsubmit="return confirmation()"
 			action="{{ url('/Providers', $provider->id) }}"
 			method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="_method" value="DELETE">
+			<input type="hidden" name="_method" onclick="pregunta()" value="DELETE">
 			<button type="submit" class="btn btn-danger btn-sm">
 				<span class="glyphicon glyphicon-remove"></span>
 			</button>
@@ -147,4 +147,14 @@ class="btn btn-primary">
 Inicio
 </a>
 </div>
+<script language="JavaScript"> 
+function confirmation(){ 
+    //if(confirm("Esta seguro que desea aliminar el proveedor?"))
+    if(confirm("ESTA SEGURO QUE DESEA ELIMINAR EL PROVEEDOR?"))
+    {
+        return true;
+    }
+    return false; 
+} 
+</script>
 @stop
