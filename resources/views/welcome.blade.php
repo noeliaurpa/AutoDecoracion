@@ -63,7 +63,7 @@
             <div class="hero">
               <hgroup>
                 <h1>Estamos ubicados:</h1>        
-                <h3>100 metros este de la concretera Palmares</h3>
+                <h3>50 metros este de suministros Coopepalmares</h3>
               </hgroup>
             </div>
           </div>

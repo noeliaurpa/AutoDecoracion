@@ -62,9 +62,9 @@
 <body>
 	<div class="header">
 		<a><img class="logo" type="image" src="../public/img/logo.jpg"></a>
-		<h5>Dirección: 800 metros este de la concretera Palmares</h5>
-		<h5>Teléfono: 24536789</h5>
-		<h5>Horario: de 8am a 5pm</h5>
+		<h5>Dirección: 50 metros este de suministros Coopepalmares</h5>
+		<h5>Teléfono: 24530484</h5>
+		<h5>Horario: de Lunes a Sábados de 8am a 6pm</h5>
 		<h4>Fecha: <label name="fecha" type="text" id="fecha" value="<?php echo date("m/d/y"); ?>" size="10" /><?php echo date("m/d/Y"); ?></label> </h5>
 	</div>
 	<hr>
