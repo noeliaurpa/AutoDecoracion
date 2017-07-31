@@ -7,6 +7,6 @@
 </div>
 <!-- Buttons -->
 <div class="form-group">
-  <button type="submit" class="btn btn-primary">{{ $submitButtonText }}</button>
+  <button onclick="disabled = true;this.form.submit()" type="submit" class="btn btn-primary">{{ $submitButtonText }}</button>
   <a class="btn btn-danger" href="{{ URL::to('message/') }}">Cancelar</a>
 </div>

@@ -24,7 +24,7 @@ class InvoiceReportController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de las facturas
-        $invoices['factura'] = Invoicesreport::search($request->name)->orderBy('id', 'ASC')->paginate();
+        $invoices['factura'] = Invoicesreport::search($request->name)->orderBy('id', 'ASC')->paginate(99999999999);
         return view('invoices/index' , $invoices);
     }
 

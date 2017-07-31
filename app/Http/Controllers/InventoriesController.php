@@ -17,7 +17,7 @@ class InventoriesController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los artistas
-        $inventories['inventor'] = Inventorie::search($request->name)->orderBy('id', 'ASC')->paginate();
+        $inventories['inventor'] = Inventorie::search($request->name)->orderBy('id', 'ASC')->paginate(99999999999);
         // en formato json
         //return response()->json($Articles);
         return View('/inventories/index', $inventories);

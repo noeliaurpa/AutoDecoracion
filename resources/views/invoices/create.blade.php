@@ -90,7 +90,7 @@
 		</tfoot>
 	</table>
 	<div class="form-group">
-		<button onclick="saveData()" class="btn btn-primary">Guardar</button>
+		<button onclick="saveData()" id="save" class="btn btn-primary">Guardar</button>
 		<a class="btn btn-danger" href="{{ URL::to('invoices/') }}">Cancelar</a>
 	</div>
 
@@ -236,6 +236,7 @@ function addToCartTable(cells) {
 var BASEURL = "{{ url('/') }}"
 function saveData(){
 	//debugger;
+	document.getElementById("save").disabled = true;
 	var miTabla = document.getElementsByTagName("table")[0];
 	//console.log(miTabla);
 	var miybody = miTabla.getElementsByTagName("tbody")[0];

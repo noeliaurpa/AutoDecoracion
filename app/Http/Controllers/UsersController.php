@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los usuarios
-        $users['users'] = User::search($request->name)->orderBy('id', 'ASC')->paginate();
+        $users['users'] = User::search($request->name)->orderBy('id', 'ASC')->paginate(99999999999);
         // en formato json
         return View('/auth/index', $users);
     }

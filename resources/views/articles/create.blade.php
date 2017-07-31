@@ -16,5 +16,7 @@
 	</form>
 	@include('errors.list')
 </div>
+<script type="text/javascript">
 
+</script>
 @stop

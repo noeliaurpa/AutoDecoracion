@@ -20,7 +20,7 @@ class ProviderController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los artistas
-        $providers['provideer'] = Provider::search($request->name)->orderBy('id', 'ASC')->paginate();
+        $providers['provideer'] = Provider::search($request->name)->orderBy('id', 'ASC')->paginate(99999999999);
         // en formato json
         //return response()->json($providers);
         return View('/providers/index', $providers);

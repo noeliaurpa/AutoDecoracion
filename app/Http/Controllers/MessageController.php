@@ -20,7 +20,7 @@ class MessageController extends Controller
     public function index(Request $request)
     {
         // recupera todos los registros de los mensajes
-        $message['messaje'] = Notification::search($request->message)->orderBy('id', 'ASC')->paginate();
+        $message['messaje'] = Notification::search($request->message)->orderBy('id', 'ASC')->paginate(99999999999);
         // en formato json
         return View('/notifications/index', $message);
     }

@@ -36,7 +36,7 @@
 				</ul>
 			</div>
 			<div class="col-xs-2">
-				<button type="submit" class="btn btn-primary form-control">Enviar mensaje</button>
+				<button onclick="disabled = true;this.form.submit()" type="submit" class="btn btn-primary form-control">Enviar mensaje</button>
 			</div>
 		</div>
 		<hr>
