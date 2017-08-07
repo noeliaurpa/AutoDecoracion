@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Quote;
+use Session;
 
 class QuotesController extends Controller
 {
@@ -29,12 +30,16 @@ class QuotesController extends Controller
      */
     public function store(Request $request)
     {
-        $quote = new Quote();
-        $quote->title = $request->title;
-        $quote->start = $request->date_start.' '.$request->time_start;
-        $quote->end = $request->date_end;
-        $quote->color = $request->color;
-        $quote->save();
+        if (($request->date_start.' '.$request->time_start) < $request->date_end) {
+            $quote = new Quote();
+            $quote->title = $request->title;
+            $quote->start = $request->date_start.' '.$request->time_start;
+            $quote->end = $request->date_end;
+            $quote->color = $request->color;
+            $quote->save();
+        }else{
+            Session::flash('flash_message', 'Hubo un error a la hora de crear la cita, asegurece de que está colocando las fechas correctamente');
+        }
 
         return redirect('/home');
     }
@@ -50,11 +55,11 @@ class QuotesController extends Controller
         $quote = Quote::find($id);
         if($quote == null)
             return Response()->json([
-            'message' => 'success delete.'
-            ]);
+                'message' => 'success delete.'
+                ]);
         $quote->delete();
         return Response()->json([
             'message' => 'success delete.'
-        ]);
+            ]);
     }
 }

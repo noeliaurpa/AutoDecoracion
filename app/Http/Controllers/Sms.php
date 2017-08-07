@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\View;
 
 class Sms extends Controller
 {
-	public function index()
-	{
+    public function index()
+    {
         $customers['cliennt'] = Customer::all();
         $customers['mesage'] = Notification::all();
         return View::make('sms')

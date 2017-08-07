@@ -74,7 +74,7 @@ class UsersController extends Controller
             // delete
             $users = User::find($id);
             $users->delete();
-            Session::flash('flash_message', 'Se eliminó correctamente.');
+            Session::flash('success_message', 'Se eliminó correctamente.');
             return Redirect::to('/users');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de eliminar el usuario');

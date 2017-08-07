@@ -135,6 +135,7 @@
 			</table>
 		</div>
 		<a class="btn btn-primary" href="{{ url('invoices/createReportPurchase')}}">Facturar al proveedor</a>
+		<a href="{{ url('/home') }}" class="btn btn-primary"> Inicio </a>
 	</div>
 	<hr>
 </div>

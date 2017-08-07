@@ -587,3 +587,18 @@ table{
 .reports input[type=radio]:checked ~ label{
   color: #831608;
 }
+.navbar-default{
+  border-color: #831608!important;
+}
+
+.navbar{
+  border-radius: 0%!important;
+}
+
+.panel-heading{
+  border-radius: 0%!important;
+}
+
+.menu_home ul{
+  padding: 0% 0% 0% 14.5%!important;
+}

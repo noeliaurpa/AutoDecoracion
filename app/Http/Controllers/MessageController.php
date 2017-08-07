@@ -107,7 +107,7 @@ class MessageController extends Controller
             // delete
             $message = Notification::find($id);
             $message->delete();
-            Session::flash('flash_message', 'Se eliminó correctamente.');
+            Session::flash('success_message', 'Se eliminó correctamente.');
             return Redirect::to('message');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de eliminar el mensaje');

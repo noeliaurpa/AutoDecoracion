@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Request\TagRequest;
 use App\Customer;
-use App\vehicle;
+use App\Vehicle;
+use App\Brand;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
@@ -37,6 +38,7 @@ class VehiclesController extends Controller
     {
         $vehicles['vehiclee'] = Vehicle::all();
         $vehicles['clieen'] = Customer::all();
+        $vehicles['brands'] = Brand::all();
         // en formato json
         //return response()->json($vehicles);
         //return View('/vehicles/index', $vehicles);
@@ -88,8 +90,8 @@ class VehiclesController extends Controller
     {
         // Recupera el registro de base de datos
         $vehicles['vehiclee'] = Vehicle::find($id);
-        $vehicles['clieen'] = Customer::all();
-
+        $vehicles['clieen'] = Customer::where('id', '=', $vehicles['vehiclee']->client_id)->get();
+        $vehicles['brands'] = Brand::where('brand', '=', $vehicles['vehiclee']->brand)->get();
             //  Muestra el formulario de edición y pasa datos del registro
         return View::make('vehicles.edit')
         ->with($vehicles);
@@ -106,8 +108,8 @@ class VehiclesController extends Controller
     {
         try {
             $vehicles = Vehicle::find($id);
-            $vehicles->Customer_id = $request->get('Customer_id');
-            $vehicles->license_plate_or_detail   = $request->get('license_plate_or_detail    ');
+            $vehicles->client_id = $request->get('client_id');
+            $vehicles->license_plate_or_detail = $request->get('license_plate_or_detail');
             $vehicles->brand = $request->get('brand');
             $vehicles->model = $request->get('model');
             $vehicles->observation = $request->get('observation');

@@ -125,7 +125,7 @@ class ProviderController extends Controller
             // delete
             $providers = Provider::find($id);
             $providers->delete();
-            Session::flash('flash_message', 'Se eliminó correctamente.');
+            Session::flash('success_message', 'Se eliminó correctamente.');
             return Redirect::to('Providers');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de eliminar un proveedor');
