@@ -22,7 +22,7 @@ class CreateInvoicesArticlesTable extends Migration
             $table->float('price', 9, 2); // precio del producto
             $table->float('total', 9, 2); //suma de los productos
             $table->timestamps();
-            $table->foreign('invoice_id')->references('id')->on('invoicesReports');
+            $table->foreign('invoice_id')->references('id')->on('invoicesreports');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateInvoicesArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoicesArticles');
+        Schema::dropIfExists('invoicesarticles');
     }
 }

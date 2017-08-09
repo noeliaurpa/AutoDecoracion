@@ -30,6 +30,6 @@ class CreateBoxSmallTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('smallBoxes');
+        Schema::dropIfExists('smallboxes');
     }
 }
