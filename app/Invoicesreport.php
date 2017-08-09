@@ -15,6 +15,8 @@ class Invoicesreport extends Model
     'license_plate_or_detail','brand','model', 'number', 'nameClient','total', 'subtotal', 'iv', 'observation', 'state','Client_or_Provider'
     ];
 
+    protected $table = 'invoicesreports';
+
     public function scopeSearch($query, $nameClient)
     {
         return $query->where('nameClient', 'LIKE', "%$nameClient%");
