@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 class Notificacion extends Notification
 {
@@ -49,6 +50,7 @@ class Notificacion extends Notification
     {
         return (new MailMessage)
         ->subject('Cambio de contraseña')
+        ->greeting('Hola')
         ->line('Usted ha recibido un correo para el cambio de contraseña')
         ->action('Restablecimiento de contraseña', route('password.reset', $this->token))
         ->line('Si no solicitó un restablecimiento de contraseña, no se requiere ninguna acción adicional');
