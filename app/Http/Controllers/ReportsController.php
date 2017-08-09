@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
-use App\InvoicesReport;
+use App\Invoicesreport;
 use PDF;
 use Illuminate\Support\Facades\View;
 use DB;
@@ -40,7 +40,7 @@ class ReportsController extends Controller
             WHERE created_at >= '2017-07-01' and created_at <= '2017-07-31'
             GROUP BY invoicesreports.id WITH ROLLUP
             */
-            $invoiceV['invoiceV'] = InvoicesReport::where('Client_or_Provider','=', 2)->where('state', '=', 1)->where('created_at','>=', $request->dateIni . ' 00:00:00')->where('created_at','<=', $request->dateEnd . ' 23:59:59')->get();
+            $invoiceV['invoiceV'] = Invoicesreport::where('Client_or_Provider','=', 2)->where('state', '=', 1)->where('created_at','>=', $request->dateIni . ' 00:00:00')->where('created_at','<=', $request->dateEnd . ' 23:59:59')->get();
             $invoiceV['ventas'] = 2;
             //echo $request->dateIni . ' 00:00:00';
             $invoiceV['contador'] = 0;
@@ -55,7 +55,7 @@ class ReportsController extends Controller
             $pdf = PDF::loadView('reports', $invoiceV);
             return $pdf->download('facturaVentas.pdf');
         }else if($request->get('report') == "Facturas de compras"){
-            $invoiceC['invoiceC'] = InvoicesReport::where('Client_or_Provider','=', 1)->where('state', '=', 1)->where('created_at','>=', $request->dateIni . ' 00:00:00')->where('created_at','<=', $request->dateEnd . ' 23:59:59')->get();
+            $invoiceC['invoiceC'] = Invoicesreport::where('Client_or_Provider','=', 1)->where('state', '=', 1)->where('created_at','>=', $request->dateIni . ' 00:00:00')->where('created_at','<=', $request->dateEnd . ' 23:59:59')->get();
             //echo $invoiceC;
             $invoiceC['ventas'] = 1;
             $invoiceC['compras'] = 1;
