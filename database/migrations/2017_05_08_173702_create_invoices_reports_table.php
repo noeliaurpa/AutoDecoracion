@@ -13,7 +13,7 @@ class CreateInvoicesReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoicesReports', function (Blueprint $table) {
+        Schema::create('invoicesreports', function (Blueprint $table) {
             $table->increments('id'); //id
             $table->string('license_plate_or_detail')->nullable(); //placa del vehiculo
             $table->string('brand')->nullable(); //marca del vehiculo

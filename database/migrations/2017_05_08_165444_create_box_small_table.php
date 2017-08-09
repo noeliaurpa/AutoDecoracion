@@ -13,7 +13,7 @@ class CreateBoxSmallTable extends Migration
      */
     public function up()
     {
-        Schema::create('smallBoxes', function (Blueprint $table) {
+        Schema::create('smallboxes', function (Blueprint $table) {
             $table->increments('id'); //id
             $table-> integer('article_id')->unsigned(); //id del cliente
             $table->string('nameArticle');//nombre del articulo

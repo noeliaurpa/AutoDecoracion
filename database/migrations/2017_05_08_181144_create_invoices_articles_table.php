@@ -13,7 +13,7 @@ class CreateInvoicesArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoicesArticles', function (Blueprint $table) {
+        Schema::create('invoicesarticles', function (Blueprint $table) {
             $table->increments('id'); //id
             $table->integer('invoice_id')->unsigned(); //id del reporte de factura
             $table->string('codeArticle');
