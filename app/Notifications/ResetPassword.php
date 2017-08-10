@@ -6,18 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Auth\Notifications\ResetPassword;
 
-class Notificacion extends Notification
+class ResetPassword extends Notification
 {
     use Queueable;
-
-    /**
-     * The password reset token.
-     *
-     * @var string
-     */
-    public $token;
 
     /**
      * Create a new notification instance.
@@ -50,9 +42,22 @@ class Notificacion extends Notification
     {
         return (new MailMessage)
         ->subject('Cambio de contraseña')
-        ->greeting('Hola')
+        ->greeting('Hola!')
         ->line('Usted ha recibido un correo para el cambio de contraseña')
         ->action('Restablecimiento de contraseña', route('password.reset', $this->token))
         ->line('Si no solicitó un restablecimiento de contraseña, no se requiere ninguna acción adicional');
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
     }
 }
