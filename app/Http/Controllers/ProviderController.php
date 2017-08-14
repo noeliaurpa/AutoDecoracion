@@ -145,14 +145,14 @@ class ProviderController extends Controller
                         'name' => 'required|string|max:191|min:3',
                         'number_provider' => 'required|integer|max:99999999',
                         'address_provider' => 'required|string|max:150',
-                        'email' => 'required|string|email|max:150|unique:providers'
+                        'email' => 'required|string|email|max:150'
                         ]);
                 }else{
                     $validator = Validator::make($request->all(),[
                         'name' => 'required|string|max:191|min:3',
                         'number_provider' => 'required|integer|max:99999999',
                         'address_provider' => 'required|string|max:150',
-                        'email' => 'required|string|email|max:150|unique:providers',
+                        'email' => 'required|string|email|max:150',
                         'observation' => 'string|max:150'
                         ]);
                 }
@@ -162,7 +162,7 @@ class ProviderController extends Controller
                         'name' => 'required|string|max:191|min:3',
                         'number_provider' => 'required|integer|max:99999999',
                         'address_provider' => 'required|string|max:150',
-                        'email' => 'required|string|email|max:150|unique:providers',
+                        'email' => 'required|string|email|max:150',
                         'fax_provider' => 'integer|max:99999999'
                         ]);
                 }else{
@@ -170,7 +170,7 @@ class ProviderController extends Controller
                         'name' => 'required|string|max:191|min:3',
                         'number_provider' => 'required|integer|max:99999999',
                         'address_provider' => 'required|string|max:150',
-                        'email' => 'required|string|email|max:150|unique:providers',
+                        'email' => 'required|string|email|max:150',
                         'fax_provider' => 'integer|max:99999999',
                         'observation' => 'string|max:150'
                         ]);

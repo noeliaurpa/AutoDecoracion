@@ -1,7 +1,7 @@
 <!-- Form Input -->
 <div class="form-group">
   <label for="message">Escriba un mensaje:</label>
-  <input  maxlength="70"
+  <input  maxlength="70" placeholder="Por ejemplo: Autodecoracion Palmares le indica que su vehiculo esta listo"
   type="text" name="message" class="form-control"
   value="{{ isset($messaje->message) ? $messaje->message : '' }}" required>
 </div>
