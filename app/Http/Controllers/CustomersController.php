@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class CustomersController extends Controller
 {
@@ -46,9 +47,27 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         try {
-            Customer::create($request->all());
-            Session::flash('success_message', 'Se ha creado correctamente.');
-            return redirect('customers');
+            if($request->observation == null){
+                $validator = Validator::make($request->all(),[
+                    'name' => 'required|string|max:191|min:3',
+                    'tell' => 'required|integer|max:99999999'
+                    ]);
+            }else{
+                $validator = Validator::make($request->all(),[
+                    'name' => 'required|string|max:191|min:3',
+                    'tell' => 'required|integer|max:99999999',
+                    'observation' => 'string|max:191'
+                    ]);
+            }
+
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('customers/create')->withErrors($validator)->withInput();
+            }else{
+                Customer::create($request->all());
+                Session::flash('success_message', 'Se ha creado correctamente.');
+                return redirect('customers');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de crear al cliente');
             return Redirect::to('customers');
@@ -93,13 +112,31 @@ class CustomersController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $customers = Customer::find($id);
-            $customers->name = $request->get('name');
-            $customers->tell = $request->get('tell');
-            $customers->observation = $request->get('observation');
-            $customers->save();
-            Session::flash('update_message', 'Se actualizó correctamente.');
-            return Redirect::to('customers');
+            if($request->observation == null){
+                $validator = Validator::make($request->all(),[
+                    'name' => 'required|string|max:191|min:3',
+                    'tell' => 'required|integer|max:99999999'
+                    ]);
+            }else{
+                $validator = Validator::make($request->all(),[
+                    'name' => 'required|string|max:191|min:3',
+                    'tell' => 'required|integer|max:99999999',
+                    'observation' => 'string|max:191'
+                    ]);
+            }
+
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('customers/'.$id.'/edit')->withErrors($validator)->withInput();
+            }else{
+                $customers = Customer::find($id);
+                $customers->name = $request->get('name');
+                $customers->tell = $request->get('tell');
+                $customers->observation = $request->get('observation');
+                $customers->save();
+                Session::flash('update_message', 'Se actualizó correctamente.');
+                return Redirect::to('customers');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de actualizar al cliente');
             return Redirect::to('customers');

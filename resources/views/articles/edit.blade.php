@@ -14,10 +14,6 @@
 		@include('articles.partials.form',
 		['submitButtonText'=>'Actualizar'])
 	</form>
-</div>
-<div class="row">
-	<div class="col-md-5">
-		@include('errors.list')
-	</div>
+	@include('errors.list')
 </div>
 @stop

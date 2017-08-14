@@ -7,6 +7,14 @@
 @parent
 
 <div class="col-md-10 col-xs-10 visible-md visible-lg hidden-xs hidden-md">
+	<div class="input-group">
+		@if(Session::has('flash_message'))
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>¡ATENCIÓN!</strong> {{Session::get('flash_message')}}.
+		</div>
+		@endif
+	</div>
 	<h1>Nuevo Articulo</h1>
 	<hr>
 	<form action=" {{ url('/articles') }}" method="post">

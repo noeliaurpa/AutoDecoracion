@@ -136,7 +136,7 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay,listMonth'
         },
-                    navLinks: true, // can click day/week titles to navigate views
+                    navLinks: true, // puede dar click en dia/semana para ver cada uno
                     editable: true,
                     selectable: true, //el selectable permite que cada dia se pueda seleccionar
                     selectHelper: true, // permite agregar un nuevo evento a nuestro calendario

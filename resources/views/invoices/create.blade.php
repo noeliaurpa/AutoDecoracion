@@ -9,12 +9,10 @@
 	<h2 class="page-header" style="color:#831608;">
 		Nueva Factura
 	</h2>
-	<!--form action=" {{ url('/invoices') }}" method="post">
-	<input type="hidden" name="_token" value="{{ csrf_token() }}"-->
 	<div class="well well-sm">
 		<div class="row">
 			<div class="col-xs-10">
-				<input id="nameClient" name="nameClient" class="form-control" type="text" placeholder="Nombre del cliente"/>
+				<input id="nameClient" name="nameClient" class="form-control" type="text" placeholder="Nombre del cliente, ejemplo: Ana Jiménez"/>
 			</div>
 			<div class="col-xs-2">
 				<input id="numInvoice" value="{{$numInvoice+1}}" name="numInvoice" class="form-control" type="text" placeholder="numero de factura" readonly>
@@ -23,13 +21,13 @@
 		<hr>
 		<div class="row">
 			<div class="col-xs-4">
-				<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo"/>
+				<input id="brand" name="brand" class="form-control" type="text" placeholder="Marca del vehículo, por ejemplo: Suzuki"/>
 			</div>
 			<div class="col-xs-4">
-				<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo"/>
+				<input id="model" name="model" class="form-control" type="text" placeholder="Modelo del vehículo, por ejemplo: Vitara"/>
 			</div>
 			<div class="col-xs-4">
-				<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa" data-list="#mylicense" data-multiple />
+				<input id="license" name="license" class="form-control awesomplete" type="text" placeholder="placa, por ejemplo ABC123 o 123456" data-list="#mylicense" data-multiple />
 				<ul id="mylicense" hidden >
 					@foreach($vehicle as $key)
 					<li id="plate" name="{{ $key->id }}" value="{{ $key->license_plate_or_detail }}">{{$key->license_plate_or_detail}}</li>
@@ -40,7 +38,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-7">
-			<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo" data-list="#myarticle" data-multiple>
+			<input id="articlee" class="form-control awesomplete" type="text" placeholder="Nombre del articulo: por ejemplo: Bombillo" data-list="#myarticle" data-multiple>
 			<ul id="myarticle" hidden>
 				@foreach($article as $key)
 				<li id="articles" name="{{ $key->id }}" value="{{ $key->name }}">{{$key->name}}</li>
@@ -93,8 +91,7 @@
 		<button onclick="saveData()" id="save" class="btn btn-primary">Guardar</button>
 		<a class="btn btn-danger" href="{{ URL::to('invoices/') }}">Cancelar</a>
 	</div>
-
-	<!--/form-->
+	@include('errors.list')
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -119,7 +116,6 @@ document.getElementById('license').addEventListener('awesomplete-selectcomplete'
 				if(cli[y] == vehi[i-3]){
 					//se coloca el nombre del cliente en el input que tiene el ip nameClien
 					document.getElementById("nameClient").value = cli[y+3];
-					//document.getElementById("numInvoice").value = "000"+cli[y].split(":")[1].split(",")[0];
 				}else{
 				}
 			};
@@ -147,6 +143,9 @@ document.getElementById('articlee').addEventListener('awesomplete-selectcomplete
 	};
 });
 
+/*
+Este metodo agrega filas a la tabla
+*/
 
 function add(button) {
 	var row = button.parentNode.parentNode;
@@ -154,6 +153,9 @@ function add(button) {
 	addToCartTable(cells);
 }
 
+/*
+Este metodo quita filas de la tabla
+*/
 function remove() {
 	var row = this.parentNode.parentNode;
 	document.querySelector('#detailInvoice tbody').removeChild(row);
@@ -186,6 +188,10 @@ function remove() {
 		}
 	}
 }
+
+/*
+Agrega la información que lleva cada fila de la tabla
+*/
 var numero = 1;
 function addToCartTable(cells) {
 	var To = 0;
@@ -194,6 +200,8 @@ function addToCartTable(cells) {
 	var price = document.getElementById("price").value;
 	if(article == "" || quanti == "" || price == ""){
 		alert("Debe agregar los campos del nombre del articulo, la cantidad y el precio para poder agregarlo a la factura.");
+	}else if(!/^([0-9])*$/.test(quanti)){
+		alert("La cantidad debe ser un número, no se permite letras");
 	}else{
 		var total = parseFloat(parseInt(quanti)*parseInt(price));
 		var newRow = document.createElement('tr');
@@ -233,6 +241,10 @@ function addToCartTable(cells) {
 	}
 }
 }
+
+/*
+Obtiene todos los datos y los va a guardar a la base de datos, o sea genera la factura
+*/
 var BASEURL = "{{ url('/') }}"
 function saveData(){
 	//debugger;
@@ -257,10 +269,13 @@ function saveData(){
 	};
 	if(document.getElementById('nameClient').value == ""){
 		alert("Se requiere el nombre del cliente");
+		document.getElementById("save").disabled = false;
 	}else if(document.getElementById('license').value == ""){
 		alert("Se requiere el numero de placa");
+		document.getElementById("save").disabled = false;
 	}else if(arreglo.length == 0){
 		alert("No se puede completar la factura sin articulos");
+		document.getElementById("save").disabled = false;
 	}else{
 		$.post(BASEURL + '/invoices', {
 			nameC: document.getElementById("nameClient").value,
@@ -279,6 +294,9 @@ function saveData(){
 
 }
 
+/*
+Crea el botoncito rojo para quitar la fila de la tabla
+*/
 function createRemoveBtn() {
 	var btnRemove = document.createElement('button');
 	btnRemove.className = 'btn btn-danger btn-xs btn-block';
@@ -287,18 +305,15 @@ function createRemoveBtn() {
 	return btnRemove;
 }
 
+/*
+Crea cada td de la tabla
+*/
 function createCell(text) {
 	var td = document.createElement('td');
 	if(text) {
 		td.innerText = text;
 	}
 	return td;
-}
-
-function calcular (argument) {
-	for (var i = 0; i < Things.length; i++) {
-		Things[i]
-	};
 }
 </script>
 

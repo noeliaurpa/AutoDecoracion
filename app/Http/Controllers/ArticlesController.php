@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class ArticlesController extends Controller
 {
@@ -52,25 +53,39 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         try {
-            $id = Article::create($request->all());
-            $idd = $id->id;
-            $nameArticle = $id->name;
-            if($request->get('radSize') == 'inventario')
-            {
-                $Inventorie = new Inventorie;
-                $Inventorie->article_id = $idd;
-                $Inventorie->nameArticle = $nameArticle;
-                $Inventorie->observation = null;
-                $Inventorie->save();
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|string|max:191|min:3',
+                'code' => 'required|string|max:8|min:6',
+                'sale_price' => 'required|integer|max:9999999999',
+                'purchase_price' => 'required|integer|max:9999999999',
+                'unit_or_quantity' => 'required|integer|max:999999'
+                ]);
+
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('articles/create')->withErrors($validator)->withInput();
             }else{
-                $Smallboxe = new Smallboxe;
-                $Smallboxe->article_id = $idd;
-                $Smallboxe->nameArticle = $nameArticle;
-                $Smallboxe->observation = null;
-                $Smallboxe->save();
+                //echo "Listo";
+                $id = Article::create($request->all());
+                $idd = $id->id;
+                $nameArticle = $id->name;
+                if($request->get('radSize') == 'inventario')
+                {
+                    $Inventorie = new Inventorie;
+                    $Inventorie->article_id = $idd;
+                    $Inventorie->nameArticle = $nameArticle;
+                    $Inventorie->observation = null;
+                    $Inventorie->save();
+                }else{
+                    $Smallboxe = new Smallboxe;
+                    $Smallboxe->article_id = $idd;
+                    $Smallboxe->nameArticle = $nameArticle;
+                    $Smallboxe->observation = null;
+                    $Smallboxe->save();
+                }
+                Session::flash('success_message', 'Se ha creado correctamente.');
+                return redirect('articles');
             }
-            Session::flash('success_message', 'Se ha creado correctamente.');
-            return redirect('articles');
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de crear el articulo');
             return Redirect::to('articles');
@@ -119,16 +134,29 @@ class ArticlesController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $articles = Article::find($id);
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|string|max:191|min:3',
+                'code' => 'required|string|max:8|min:6',
+                'sale_price' => 'required|integer|max:9999999999',
+                'purchase_price' => 'required|integer|max:9999999999',
+                'unit_or_quantity' => 'required|integer|max:999999'
+                ]);
+
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('articles/'.$id.'/edit')->withErrors($validator)->withInput();
+            }else{
+                $articles = Article::find($id);
             //$Articles->name = Input::get('name');
-            $articles->name = $request->get('name');
-            $articles->code = $request->get('code');
-            $articles->sale_price = $request->get('sale_price');
-            $articles->purchase_price = $request->get('purchase_price');
-            $articles->unit_or_quantity = $request->get('unit_or_quantity');
-            $articles->save();
-            Session::flash('update_message', 'Se actualizó correctamente.');
-            return Redirect::to('articles');
+                $articles->name = $request->get('name');
+                $articles->code = $request->get('code');
+                $articles->sale_price = $request->get('sale_price');
+                $articles->purchase_price = $request->get('purchase_price');
+                $articles->unit_or_quantity = $request->get('unit_or_quantity');
+                $articles->save();
+                Session::flash('update_message', 'Se actualizó correctamente.');
+                return Redirect::to('articles');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de actualizar el articulo');
             return Redirect::to('articles');

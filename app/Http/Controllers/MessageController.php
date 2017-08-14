@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
@@ -49,9 +50,18 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         try {
-            Notification::create($request->all());
-            Session::flash('success_message', 'Se ha creado correctamente.');
-            return redirect('message');
+            $validator = Validator::make($request->all(),[
+                'message' => 'required|string|max:70'
+                ]);
+
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('message/create')->withErrors($validator)->withInput();
+            }else{
+                Notification::create($request->all());
+                Session::flash('success_message', 'Se ha creado correctamente.');
+                return redirect('message');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de crear el mensaje');
             return Redirect::to('message');

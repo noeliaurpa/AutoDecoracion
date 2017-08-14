@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id'); // id 
             $table->string('name'); // nombre
-            $table->string('code'); //codigo del articulo
+            $table->string('code')->unique(); //codigo del articulo
             $table->float('sale_price'); //precio de venta
             $table->float('purchase_price'); // precio de compra
             $table->integer('unit_or_quantity'); //unidad o cantidad

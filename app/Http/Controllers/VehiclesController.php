@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class VehiclesController extends Controller
 {
@@ -55,9 +56,27 @@ class VehiclesController extends Controller
     public function store(Request $request)
     {
         try {
-            Vehicle::create($request->all());
-            Session::flash('success_message', 'Se ha creado correctamente.');
-            return redirect('vehicles');
+            if($request->observation == null){
+                $validator = Validator::make($request->all(),[
+                    'license_plate_or_detail' => 'required|string|max:6',
+                    'model' => 'required|string|max:50'
+                    ]);
+            }else{
+                $validator = Validator::make($request->all(),[
+                    'license_plate_or_detail' => 'required|string|max:6',
+                    'model' => 'required|string|max:50',
+                    'observation' => 'string|max:150'
+                    ]);
+            }
+            
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('vehicles/create')->withErrors($validator)->withInput();
+            }else{
+                Vehicle::create($request->all());
+                Session::flash('success_message', 'Se ha creado correctamente.');
+                return redirect('vehicles');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de crear el registro de un vehículo');
             return Redirect::to('vehicles');
@@ -107,15 +126,33 @@ class VehiclesController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $vehicles = Vehicle::find($id);
-            $vehicles->client_id = $request->get('client_id');
-            $vehicles->license_plate_or_detail = $request->get('license_plate_or_detail');
-            $vehicles->brand = $request->get('brand');
-            $vehicles->model = $request->get('model');
-            $vehicles->observation = $request->get('observation');
-            $vehicles->save();
-            Session::flash('update_message', 'Se actualizó correctamente.');
-            return Redirect::to('vehicles');
+            if($request->observation == null){
+                $validator = Validator::make($request->all(),[
+                    'license_plate_or_detail' => 'required|string|max:6',
+                    'model' => 'required|string|max:50'
+                    ]);
+            }else{
+                $validator = Validator::make($request->all(),[
+                    'license_plate_or_detail' => 'required|string|max:6',
+                    'model' => 'required|string|max:50',
+                    'observation' => 'string|max:150'
+                    ]);
+            }
+            
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('vehicles/'.$id.'/edit')->withErrors($validator)->withInput();
+            }else{
+                $vehicles = Vehicle::find($id);
+                $vehicles->client_id = $request->get('client_id');
+                $vehicles->license_plate_or_detail = $request->get('license_plate_or_detail');
+                $vehicles->brand = $request->get('brand');
+                $vehicles->model = $request->get('model');
+                $vehicles->observation = $request->get('observation');
+                $vehicles->save();
+                Session::flash('update_message', 'Se actualizó correctamente.');
+                return Redirect::to('vehicles');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de actualizar el vehículo');
             return Redirect::to('vehicles');

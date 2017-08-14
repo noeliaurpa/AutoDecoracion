@@ -9,8 +9,6 @@
 	<h2 class="page-header" style="color:#831608;">
 		Nueva Factura
 	</h2>
-	<!--form action=" {{ url('/invoices') }}" method="post">
-	<input type="hidden" name="_token" value="{{ csrf_token() }}"-->
 	<div class="well well-sm">
 		<div class="row">
 			<div class="col-xs-10">
@@ -84,8 +82,6 @@
 		<button onclick="saveData()" id="save" class="btn btn-primary">Guardar</button>
 		<a class="btn btn-danger" href="{{ URL::to('invoices/') }}">Cancelar</a>
 	</div>
-
-	<!--/form-->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -100,7 +96,7 @@ document.getElementById('articlee').addEventListener('awesomplete-selectcomplete
 	for (var i = 0; i <= artic.length; i++) {
 		//si donde está seleccionado es igual al nombre del articulo seleccionado
 		if(artic[i] == document.getElementById("articlee").value){
-			//se le coloca el precio del articulo en el campo que tiene el id quantity
+			//se le coloca el precio y la cantidad del artículo en el campo que tiene el id quantity
 			document.getElementById("quantity").value = artic[i+11].split(":")[1].split(",")[0];
 			document.getElementById("price").value = artic[i+9].split(":")[1].split(",")[0];
 		}else{
@@ -110,6 +106,9 @@ document.getElementById('articlee').addEventListener('awesomplete-selectcomplete
 	};
 });
 
+/*
+Este metodo agrega filas a la tabla
+*/
 
 function add(button) {
 	var row = button.parentNode.parentNode;
@@ -117,6 +116,9 @@ function add(button) {
 	addToCartTable(cells);
 }
 
+/*
+Este metodo quita filas de la tabla
+*/
 function remove() {
 	var row = this.parentNode.parentNode;
 	document.querySelector('#detailInvoice tbody').removeChild(row);
@@ -149,6 +151,10 @@ function remove() {
 		}
 	}
 }
+
+/*
+Agrega la información que lleva cada fila de la tabla
+*/
 var numero = 1;
 function addToCartTable(cells) {
 	var To = 0;
@@ -199,6 +205,10 @@ function addToCartTable(cells) {
 	}
 }
 }
+
+/*
+Obtiene todos los datos y los va a guardar a la base de datos, o sea genera la factura
+*/
 var BASEURL = "{{ url('/') }}"
 function saveData(){
 	//debugger;
@@ -240,6 +250,9 @@ function saveData(){
 
 }
 
+/*
+Crea el botoncito rojo para quitar la fila de la tabla
+*/
 function createRemoveBtn() {
 	var btnRemove = document.createElement('button');
 	btnRemove.className = 'btn btn-danger btn-xs btn-block';
@@ -248,6 +261,9 @@ function createRemoveBtn() {
 	return btnRemove;
 }
 
+/*
+Crea cada td de la tabla
+*/
 function createCell(text) {
 	var td = document.createElement('td');
 	if(text) {

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Laracasts\Flash\Flash;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class ProviderController extends Controller
 {
@@ -45,9 +46,51 @@ class ProviderController extends Controller
     public function store(Request $request)
     {
         try {
-            Provider::create($request->all());
-            Session::flash('success_message', 'Se ha creado correctamente.');
-            return redirect('Providers');
+            if($request->fax_provider == null){
+                if($request->observation == null){
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers'
+                        ]);
+                }else{
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers',
+                        'observation' => 'string|max:150'
+                        ]);
+                }
+            }else{
+                if($request->observation == null){
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers',
+                        'fax_provider' => 'integer|max:99999999'
+                        ]);
+                }else{
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers',
+                        'fax_provider' => 'integer|max:99999999',
+                        'observation' => 'string|max:150'
+                        ]);
+                }
+            }
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se insertaron de forma incorrecta, al final podrá observar el error');
+                return redirect('Providers/create')->withErrors($validator)->withInput();
+            }else{
+                Provider::create($request->all());
+                Session::flash('success_message', 'Se ha creado correctamente.');
+                return redirect('Providers');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de crear un proveedor');
             return Redirect::to('Providers');
@@ -96,17 +139,59 @@ class ProviderController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $providers = Provider::find($id);
+            if($request->fax_provider == null){
+                if($request->observation == null){
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers'
+                        ]);
+                }else{
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers',
+                        'observation' => 'string|max:150'
+                        ]);
+                }
+            }else{
+                if($request->observation == null){
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers',
+                        'fax_provider' => 'integer|max:99999999'
+                        ]);
+                }else{
+                    $validator = Validator::make($request->all(),[
+                        'name' => 'required|string|max:191|min:3',
+                        'number_provider' => 'required|integer|max:99999999',
+                        'address_provider' => 'required|string|max:150',
+                        'email' => 'required|string|email|max:150|unique:providers',
+                        'fax_provider' => 'integer|max:99999999',
+                        'observation' => 'string|max:150'
+                        ]);
+                }
+            }
+            if($validator->fails()){
+                Session::flash('flash_message', 'Algunos de los campos se modificaron de forma incorrecta, al final podrá observar el error');
+                return redirect('Providers/'.$id.'/edit')->withErrors($validator)->withInput();
+            }else{
+                $providers = Provider::find($id);
             //$providers->name = Input::get('name');
-            $providers->name = $request->get('name');
-            $providers->number_provider = $request->get('number_provider');
-            $providers->address_provider = $request->get('address_provider');
-            $providers->email = $request->get('email');
-            $providers->fax_provider = $request->get('fax_provider');
-            $providers->observation = $request->get('observation');
-            $providers->save();
-            Session::flash('update_message', 'Se actualizó correctamente.');
-            return Redirect::to('Providers');
+                $providers->name = $request->get('name');
+                $providers->number_provider = $request->get('number_provider');
+                $providers->address_provider = $request->get('address_provider');
+                $providers->email = $request->get('email');
+                $providers->fax_provider = $request->get('fax_provider');
+                $providers->observation = $request->get('observation');
+                $providers->save();
+                Session::flash('update_message', 'Se actualizó correctamente.');
+                return Redirect::to('Providers');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             Session::flash('flash_message', 'Hubo un error a la hora de modificar un proveedor');
             return Redirect::to('Providers');

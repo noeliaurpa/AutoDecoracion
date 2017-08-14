@@ -138,13 +138,14 @@
 		<a href="{{ url('/home') }}" class="btn btn-primary"> Inicio </a>
 	</div>
 	<hr>
+	@include('errors.list')
 </div>
 <script language="JavaScript"> 
 function confirmation(){ 
     //if(confirm("Esta seguro que desea aliminar el proveedor?"))
     if(confirm("ESTA SEGURO QUE DESEA ANULAR LA FACTURA?"))
     {
-        return true;
+    	return true;
     }
     return false; 
 } 
