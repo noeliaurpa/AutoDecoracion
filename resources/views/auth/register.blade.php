@@ -64,7 +64,7 @@
                             <label for="tell" class="col-md-4 control-label">Telefono</label>
 
                             <div class="col-md-6">
-                                <input id="tell" type="text" class="form-control" name="tell" value="{{ old('tell') }}" required autofocus>
+                                <input id="tell" type="number" max="99999999" class="form-control" name="tell" value="{{ old('tell') }}" required autofocus>
 
                                 @if ($errors->has('tell'))
                                 <span class="help-block">
