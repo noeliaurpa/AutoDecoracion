@@ -35,8 +35,8 @@
 	<?php echo Form::open(['url' => 'vehicles', 'method' => 'GET', 'class' => 'navbar-form pull-right']); ?>
 
 	<div class="input-group">
-		<span title="Precione enter ara buscar" class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		<?php echo Form::text('license_plate_or_detail', null, ['title' => 'Precione enter para buscar','class' => 'form-control search', 'placeholder' => 'Buscar vehiculos', 'aria-describedby' => 'search']); ?>
+		<span title="Precione enter para buscar" class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		<?php echo Form::text('license_plate_or_detail', null, ['title' => 'Precione enter para buscar','class' => 'form-control search', 'placeholder' => 'Buscar vehiculos por placa', 'aria-describedby' => 'search']); ?>
 	</div>
 	<?php echo Form::close(); ?>
 	<div class="table-responsive">
