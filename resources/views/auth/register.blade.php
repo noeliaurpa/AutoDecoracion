@@ -14,7 +14,7 @@
                             <label for="name" class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" placeholder="Ejemplo: Maria Araya" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                 <span class="help-block">
@@ -28,7 +28,7 @@
                             <label for="email" class="col-md-4 control-label">Correo electronico</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" placeholder="Ejemplo: mariaaraya@gmail.com" class="form-control" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                 <span class="help-block">
@@ -42,7 +42,7 @@
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" placeholder="Ejemplo: Maria1234$" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
                                 <span class="help-block">
@@ -56,7 +56,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirmar contraseña</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" placeholder="Ejemplo: Maria1234$" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
@@ -64,7 +64,7 @@
                             <label for="tell" class="col-md-4 control-label">Telefono</label>
 
                             <div class="col-md-6">
-                                <input id="tell" type="number" max="99999999" class="form-control" name="tell" value="{{ old('tell') }}" required autofocus>
+                                <input id="tell" type="number" placeholder="Ejemplo: 87654090" max="99999999" class="form-control" name="tell" value="{{ old('tell') }}" required autofocus>
 
                                 @if ($errors->has('tell'))
                                 <span class="help-block">
@@ -97,7 +97,7 @@
                         <label for="salary" class="col-md-4 control-label">Salario</label>
 
                         <div class="col-md-6">
-                            <input id="salary" type="text" class="form-control" name="salary" value="{{ old('salary') }}" required autofocus>
+                            <input id="salary" type="number" placeholder="Ejemplo: 1000000" max="10000000" class="form-control" name="salary" value="{{ old('salary') }}" required autofocus>
 
                             @if ($errors->has('salary'))
                             <span class="help-block">
@@ -111,7 +111,7 @@
                         <label for="observation" class="col-md-4 control-label">Observacion</label>
 
                         <div class="col-md-6">
-                            <input id="observation" type="text" class="form-control" name="observation" value="{{ old('observation') }}">
+                            <input id="observation" type="text" placeholder="Ejemplo: Usuario de prueba" class="form-control" name="observation" value="{{ old('observation') }}">
 
                             @if ($errors->has('observation'))
                             <span class="help-block">

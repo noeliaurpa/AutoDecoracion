@@ -51,32 +51,23 @@
                     @else 
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle linka">
                            {{ Auth::user()->name }} <span class="caret"></span>
                        </a>
                        @if (Auth::user()->workstation == "Administrador")
                        <ul class="dropdown-menu" role="menu">
-                        <li class = "lipadding dropdown"><a class="btn btn-default linksHome" href="{{ route('register') }}">Registrar</a></li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('customers/')}}" role="button">Clientes</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('vehicles/')}}" role="button">Vehículos</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Inventario</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('invoices/')}}" role="button">Facturas</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Caja Chica</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Notificaciones</a> </li>
-                        <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Reportes</a> </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            Cerrar Sesion
-                        </a>
+                        <li class = "dropdown"> <a class="btn btn-primary linksHome" href="{{ route('register') }}">Registrar</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                Cerrar Sesion
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
                     @else 
                     <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('Providers/')}}" role="button">Proveedores</a> </li>
                     <li class = "lipadding dropdown"><a class="menuPrincipal" href="{{ URL::to('articles/')}}" role="button">Articulos</a> </li>
