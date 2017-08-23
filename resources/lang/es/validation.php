@@ -142,6 +142,6 @@ return [
         'tell'                  => 'teléfono',
         'license_plate_or_detail'=>'placa o detalle',
         'model'                 => 'modelo',
-        'tellClient'           => 'nombre del cliente y número de teléfono',
+        'tellClient'           => 'el número de teléfono',
     ],
 ];
