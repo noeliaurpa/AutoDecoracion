@@ -26,7 +26,7 @@ class Sms extends Controller
         try {
             $validator = Validator::make($request->all(),[
                 'message' => 'required|string|max:70',
-                'tellClient' => 'required|integer|max:99999999'
+                'tellClient' => 'required|integer|max:99999999999'
                 ]);
 
             if($validator->fails()){
